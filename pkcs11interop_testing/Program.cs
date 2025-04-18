@@ -38,7 +38,11 @@ namespace pkcs11interop_testing
                     var slotInfo = slot.GetSlotInfo();
                     //Debug.WriteLine(slotInfo.ManufacturerId);
                     Console.WriteLine(slotInfo.SlotId);
-                    Console.WriteLine(slotInfo.SlotDescription);
+                    var token = slot.GetTokenInfo();
+                    Console.WriteLine(token.SerialNumber);
+                    Console.WriteLine(token.Label);
+                    Console.WriteLine(token.Model);
+                    Console.WriteLine("__________________________");
                 }
             }
         }
