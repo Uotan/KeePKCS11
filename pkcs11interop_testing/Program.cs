@@ -16,8 +16,10 @@ namespace pkcs11interop_testing
     {
         static void Main(string[] args)
         {
-            
-            using (IPkcs11Library pkcs11Library = Settings.Factories.Pkcs11LibraryFactory.LoadPkcs11Library(Settings.Factories, "C:\\Windows\\System32\\jcPKCS11-2.dll", Settings.AppType))
+            Console.WriteLine("enter library path");
+            string libraryPath = Console.ReadLine();
+
+            using (IPkcs11Library pkcs11Library = Settings.Factories.Pkcs11LibraryFactory.LoadPkcs11Library(Settings.Factories, libraryPath, Settings.AppType))
             {
                 ILibraryInfo libraryInfo = pkcs11Library.GetInfo();
                 Console.WriteLine(libraryInfo.LibraryVersion);
@@ -28,7 +30,7 @@ namespace pkcs11interop_testing
             }
 
 
-            using (IPkcs11Library pkcs11Library = Settings.Factories.Pkcs11LibraryFactory.LoadPkcs11Library(Settings.Factories, "C:\\Windows\\System32\\jcPKCS11-2.dll", Settings.AppType))
+            using (IPkcs11Library pkcs11Library = Settings.Factories.Pkcs11LibraryFactory.LoadPkcs11Library(Settings.Factories, libraryPath, Settings.AppType))
             {
                 // Get list of available slots
                 List<ISlot> slots = pkcs11Library.GetSlotList(SlotsType.WithTokenPresent);
