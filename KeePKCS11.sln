@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pkcs11interop_testing", "pk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptokiKeyProvider", "CryptokiKeyProvider\CryptokiKeyProvider.csproj", "{86B49581-1D6E-4E41-9BBF-E90A7978E07F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pkcs11interop_X", "pkcs11interop_X\pkcs11interop_X.csproj", "{40C6E450-13EB-4DCB-B164-2905C13C65E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
