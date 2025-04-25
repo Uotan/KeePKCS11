@@ -28,7 +28,7 @@ using (IPkcs11Library pkcs11Library = factories.Pkcs11LibraryFactory.LoadPkcs11L
     Console.WriteLine("  Version:            " + libraryInfo.LibraryVersion);
 
     // Get list of all available slots
-    foreach (ISlot slot in pkcs11Library.GetSlotList(SlotsType.WithOrWithoutTokenPresent))
+    foreach (ISlot slot in pkcs11Library.GetSlotList(SlotsType.WithTokenPresent))
     {
         // Show basic information about slot
         ISlotInfo slotInfo = slot.GetSlotInfo();
