@@ -35,7 +35,9 @@
             this.lblLibraryVersion = new System.Windows.Forms.Label();
             this.lblCryptokiVersion = new System.Windows.Forms.Label();
             this.gridSlots = new System.Windows.Forms.DataGridView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridSlots)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGetLibraryInfo
@@ -105,11 +107,22 @@
             this.gridSlots.StandardTab = true;
             this.gridSlots.TabIndex = 6;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WindowsForms_pkcs11admin.Properties.Resources.pkcs11_token;
+            this.pictureBox1.Location = new System.Drawing.Point(415, 61);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(97, 97);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gridSlots);
             this.Controls.Add(this.lblCryptokiVersion);
             this.Controls.Add(this.lblLibraryVersion);
@@ -123,6 +136,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "pkcs#11 test editor";
             ((System.ComponentModel.ISupportInitialize)(this.gridSlots)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +151,7 @@
         private System.Windows.Forms.Label lblLibraryVersion;
         private System.Windows.Forms.Label lblCryptokiVersion;
         private System.Windows.Forms.DataGridView gridSlots;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
