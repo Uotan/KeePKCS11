@@ -1,0 +1,50 @@
+## KeePKCS11
+
+
+KeePKCS11 это простой плагин для оригинального [KeePass](https://keepass.info/), добавляющий ключевой поставщик, взаимодействующий с pkcs#11 библиотекой для ваших криптографический токенов.
+
+Плагин **НЕ** реализует ассиметричное шифрование или любое другое взаимодействие с сертификатами. Вместо этого он создает/читает объекты данных, которые KeePass испольует для симетричного шифрования встроеными алгоритмыми AES и ChaCha20.
+
+Плагин использует C# библиотеку [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop). Вы так же можете вручную создавать объекты и делать их резервную копию, используя [Pkcs11Admin](https://github.com/Pkcs11Admin/Pkcs11Admin).
+
+
+## Сборка
+
+Официальная [инструкция по созданию плагинов](https://keepass.info/help/v2_dev/plg_index.html) гласит:
+
+Выполнять команду в "cmd.exe"
+
+`D:\keepass\KeePass.exe --plgx-create D:\repos\KeePKCS11`
+
+Создаст файл "D:\repos\KeePKCS11.plgx". И всё... Открывать проект, достраивать зависимости к пространству имен KeePass НЕ ОБЯЗАТЕЛЬНО.
+
+
+
+## Совместимость
+
+### Платформа
+Плагин работает только в среде Windows. Да - вы сможете добавить его в linux, при использовании Portable версии KeePass через [mono](https://keepass.info/help/v2/setup.html#mono) и его графический интерфейс будет открываться, но библиотека [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop) работает с Linux библиотеками формата ".so" начиная с версии .NET 5 (не путать с .Net Framework или C# 5)
+
+https://dotnet.microsoft.com/ru-ru/download
+
+https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
+
+Я уже компилировал тестовые консольные приложения, используя .Net Framework 4.7.2 и запуская его через mono в среде Linux, и нативно компилировал аналогичный код на .NET 5, запуская его через [.NET Runtime for Linux](https://dotnet.microsoft.com/ru-ru/download/dotnet/thank-you/runtime-aspnetcore-5.0.17-linux-x64-binaries). Это работает только с новыми версиями .NET. Можете почитать пример использования [тут](https://github.com/Pkcs11Interop/Pkcs11Interop/blob/master/doc/06_GETTING_STARTED.md).
+
+### pkcs#11 токены
+
+#### [JaCarta Единый Клиент](https://www.aladdin-rd.ru/support/downloads/jacarta_client)
+* JaCarta PKI [PASS]
+* JaCarta-2 ГОСТ [PASS]
+* JaCarta-2 PKI/ГОСТ (видит оба апплета одновременно) [PASS]
+* eToken PRO (Java) [PASS]
+
+#### [eToken PKI Client 5.1](https://erim.ru/gde-skachat-i-kak-ustanovit-drayvery-etoken.html) / [Safenet Authentication Client](https://knowledge.digicert.com/general-information/how-to-download-safenet-authentication-client)
+* eToken ГОСТ; [PASS]
+* eToken PRO (Java) [PASS]
+
+#### [Rutoken](https://www.rutoken.ru/support/download/windows/)
+* Рутокен Lite [PASS]
+* Рутокен ЭЦП 2.0 / 3.0 [PASS]
+
+На текущий момент проверялась работа только с этими устройствами. Если ко мне когда-нибудь попадут другие устройства - они буду добавлены в этот список.

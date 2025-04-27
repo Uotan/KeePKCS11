@@ -36,9 +36,9 @@ namespace WindowsForms_pkcs11admin
                 {
                     ILibraryInfo libraryInfo = pkcs11Library.GetInfo();
 
-                    lblCryptokiVersion.Text = "Cryptoki Version: " + libraryInfo.CryptokiVersion;
+                    lblCryptokiVersion.Text = "pkcs#11 version: " + libraryInfo.CryptokiVersion;
                     lblLibraryManufacturer.Text = "Manufacturer: " + libraryInfo.ManufacturerId;
-                    lblLibraryVersion.Text = "Library Version: " + libraryInfo.LibraryVersion;
+                    lblLibraryVersion.Text = "Library version: " + libraryInfo.LibraryVersion;
 
 
                     List<ISlot> slots = pkcs11Library.GetSlotList(SlotsType.WithTokenPresent);
@@ -66,6 +66,11 @@ namespace WindowsForms_pkcs11admin
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
