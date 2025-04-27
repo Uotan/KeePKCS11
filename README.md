@@ -39,12 +39,15 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 * JaCarta-2 PKI/ГОСТ (видит оба апплета одновременно) [PASS]
 * eToken PRO (Java) [PASS]
 
-#### [eToken PKI Client 5.1](https://erim.ru/gde-skachat-i-kak-ustanovit-drayvery-etoken.html) / [Safenet Authentication Client](https://knowledge.digicert.com/general-information/how-to-download-safenet-authentication-client)
+#### [eToken PKI Client 5.1](https://erim.ru/gde-skachat-i-kak-ustanovit-drayvery-etoken.html)
 * eToken ГОСТ; [PASS]
 * eToken PRO (Java) [PASS]
 
 #### [Rutoken](https://www.rutoken.ru/support/download/windows/)
 * Рутокен Lite [PASS]
 * Рутокен ЭЦП 2.0 / 3.0 [PASS]
+
+#### [Safenet Authentication Client](https://knowledge.digicert.com/general-information/how-to-download-safenet-authentication-client)
+* SafeNet eToken 5110 [MOST LIKELY]
 
 На текущий момент проверялась работа только с этими устройствами. Если ко мне когда-нибудь попадут другие устройства - они буду добавлены в этот список.
