@@ -42,15 +42,15 @@
             this.buttonDeleteKey = new System.Windows.Forms.Button();
             this.buttonImportKey = new System.Windows.Forms.Button();
             this.buttonExportKey = new System.Windows.Forms.Button();
-            this.banner = new System.Windows.Forms.PictureBox();
             this.buttonCreateKey = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.generateUsingProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.banner = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -144,6 +144,7 @@
             // Label
             // 
             this.Label.Text = "Label";
+            this.Label.Width = 132;
             // 
             // buttonDeleteKey
             // 
@@ -177,16 +178,6 @@
             this.buttonExportKey.Text = "Export Keyfile";
             this.buttonExportKey.UseVisualStyleBackColor = true;
             this.buttonExportKey.Click += new System.EventHandler(this.buttonExportKey_Click);
-            // 
-            // banner
-            // 
-            this.banner.Dock = System.Windows.Forms.DockStyle.Top;
-            this.banner.Location = new System.Drawing.Point(0, 0);
-            this.banner.Name = "banner";
-            this.banner.Size = new System.Drawing.Size(566, 60);
-            this.banner.TabIndex = 2;
-            this.banner.TabStop = false;
-            this.banner.Click += new System.EventHandler(this.banner_Click);
             // 
             // buttonCreateKey
             // 
@@ -226,6 +217,16 @@
             this.generateUsingProfileToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.generateUsingProfileToolStripMenuItem.Text = "Generate Using Profile";
             // 
+            // banner
+            // 
+            this.banner.Dock = System.Windows.Forms.DockStyle.Top;
+            this.banner.Location = new System.Drawing.Point(0, 0);
+            this.banner.Name = "banner";
+            this.banner.Size = new System.Drawing.Size(566, 60);
+            this.banner.TabIndex = 2;
+            this.banner.TabStop = false;
+            this.banner.Click += new System.EventHandler(this.banner_Click);
+            // 
             // CkpCreationForm
             // 
             this.AcceptButton = this.buttonOK;
@@ -252,8 +253,8 @@
             this.Load += new System.EventHandler(this.OnFormLoad);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.banner)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.banner)).EndInit();
             this.ResumeLayout(false);
 
         }
