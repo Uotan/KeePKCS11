@@ -30,7 +30,7 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 
 ## pkcs#11 токены
 
-[PASS] - плагин полность совместим с этими устройства
+[PASS] - плагин полностью совместим с этим устройством.
 
 [MOST LIKELY] - производителем заявлена поддержка стандарта PKCS#11, но у меня просто нет возможности это проверить.
 
