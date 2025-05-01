@@ -1,4 +1,4 @@
-![Изображение](./.images/pkcs11_for_repo.png)
+![logo](./.images/pkcs11_for_repo.png)
 
 KeePKCS11 это простой плагин для оригинального [KeePass](https://keepass.info/), добавляющий ключевой поставщик, взаимодействующий с pkcs#11 библиотекой для ваших криптографический токенов.
 
@@ -7,7 +7,7 @@ KeePKCS11 это простой плагин для оригинального [
 Плагин использует C# библиотеку [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop). Вы так же можете вручную создавать объекты и делать их резервную копию, используя [Pkcs11Admin](https://github.com/Pkcs11Admin/Pkcs11Admin).
 
 
-## Сборка
+# Сборка
 
 Официальная [инструкция по созданию плагинов](https://keepass.info/help/v2_dev/plg_index.html) гласит:
 
@@ -17,12 +17,10 @@ KeePKCS11 это простой плагин для оригинального [
 
 Создаст файл "D:\repos\KeePKCS11.plgx". И всё... Открывать проект, достраивать зависимости к пространству имен KeePass НЕ ОБЯЗАТЕЛЬНО.
 
+# Совместимость
 
-
-## Совместимость
-
-### Платформа
-Плагин работает только в среде Windows. Да - вы сможете добавить его в linux, при использовании Portable версии KeePass через [mono](https://keepass.info/help/v2/setup.html#mono) и его графический интерфейс будет открываться, но библиотека [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop) работает с Linux библиотеками формата ".so" начиная с версии .NET 5 (не путать с .Net Framework или C# 5)
+## Платформа
+Плагин работает только в среде Windows. Да - вы сможете добавить его в linux, при использовании Portable версии KeePass через [mono](https://keepass.info/help/v2/setup.html#mono) и его графический интерфейс будет открываться, но библиотека [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop) работает с Linux библиотеками формата ".so" начиная с версии .NET 5 (не путать с .Net Framework или C# 5).
 
 https://dotnet.microsoft.com/ru-ru/download
 
@@ -30,7 +28,11 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 
 Я уже компилировал тестовые консольные приложения, используя .Net Framework 4.7.2 и запуская его через mono в среде Linux, и нативно компилировал аналогичный код на .NET 5, запуская его через [.NET Runtime for Linux](https://dotnet.microsoft.com/ru-ru/download/dotnet/thank-you/runtime-aspnetcore-5.0.17-linux-x64-binaries). Это работает только с новыми версиями .NET. Можете почитать пример использования [тут](https://github.com/Pkcs11Interop/Pkcs11Interop/blob/master/doc/06_GETTING_STARTED.md).
 
-### pkcs#11 токены
+## pkcs#11 токены
+
+[PASS] - плагин полность совместим с этими устройства
+
+[MOST LIKELY] - производителем заявлена поддержка стандарта PKCS#11, но у меня просто нет возможности это проверить.
 
 #### [Aladdin R.D. JaCarta Единый Клиент](https://www.aladdin-rd.ru/support/downloads/jacarta_client)
 * JaCarta PKI [PASS]
@@ -54,4 +56,5 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 * SafeNet eToken 5110 [MOST LIKELY]
 * eToken PRO (Java) [MOST LIKELY]
 
-На текущий момент проверялась работа только с этими устройствами. Если ко мне когда-нибудь попадут другие устройства - они буду добавлены в этот список.
+
+Постепенно буду добавлять другие устройста в этот список.
