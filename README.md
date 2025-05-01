@@ -1,5 +1,4 @@
-## KeePKCS11
-
+![logo](./.images/pkcs11_for_repo.png)
 
 KeePKCS11 это простой плагин для оригинального [KeePass](https://keepass.info/), добавляющий ключевой поставщик, взаимодействующий с pkcs#11 библиотекой для ваших криптографический токенов.
 
@@ -33,21 +32,26 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 
 ### pkcs#11 токены
 
-#### [JaCarta Единый Клиент](https://www.aladdin-rd.ru/support/downloads/jacarta_client)
+#### [Aladdin R.D. JaCarta Единый Клиент](https://www.aladdin-rd.ru/support/downloads/jacarta_client)
 * JaCarta PKI [PASS]
 * JaCarta-2 ГОСТ [PASS]
 * JaCarta-2 PKI/ГОСТ (видит оба апплета одновременно) [PASS]
 * eToken PRO (Java) [PASS]
 
-#### [eToken PKI Client 5.1](https://erim.ru/gde-skachat-i-kak-ustanovit-drayvery-etoken.html)
-* eToken ГОСТ; [PASS]
+#### [Aladdin R.D. eToken PKI Client 5.1 SP1](https://erim.ru/gde-skachat-i-kak-ustanovit-drayvery-etoken.html)
+* eToken ГОСТ [PASS]
 * eToken PRO (Java) [PASS]
 
-#### [Rutoken](https://www.rutoken.ru/support/download/windows/)
+#### [Aktiv Rutoken](https://www.rutoken.ru/support/download/windows/)
 * Рутокен Lite [PASS]
 * Рутокен ЭЦП 2.0 / 3.0 [PASS]
 
+#### [ESMART PKI Client](https://token.esmart.ru/downloads)
+* ESMART Token [MOST LIKELY]
+* ESMART Token ГОСТ [MOST LIKELY]
+
 #### [Safenet Authentication Client](https://knowledge.digicert.com/general-information/how-to-download-safenet-authentication-client)
 * SafeNet eToken 5110 [MOST LIKELY]
+* eToken PRO (Java) [MOST LIKELY]
 
 На текущий момент проверялась работа только с этими устройствами. Если ко мне когда-нибудь попадут другие устройства - они буду добавлены в этот список.
