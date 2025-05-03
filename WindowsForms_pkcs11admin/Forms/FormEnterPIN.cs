@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -37,6 +37,19 @@ namespace WindowsForms_pkcs11admin.Forms
         private void FormEnterPIN_Load(object sender, EventArgs e)
         {
             //tbxPinCode.PasswordChar = '*';
+        }
+
+        private void checkBoxDisplayPIN_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDisplayPIN.Checked)
+            {
+                tbxPinCode.UseSystemPasswordChar = false;
+            }
+            else if(!checkBoxDisplayPIN.Checked)
+            {
+                tbxPinCode.UseSystemPasswordChar = true;
+            }
+            
         }
     }
 }

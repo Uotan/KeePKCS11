@@ -44,6 +44,7 @@
             this.TokenLabel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listViewDataObjects = new System.Windows.Forms.ListView();
             this.btnReadTokenData = new System.Windows.Forms.Button();
+            this.ObjectLabel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,12 +170,18 @@
             // 
             // listViewDataObjects
             // 
+            this.listViewDataObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ObjectLabel});
+            this.listViewDataObjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewDataObjects.HideSelection = false;
+            this.listViewDataObjects.LabelWrap = false;
             this.listViewDataObjects.Location = new System.Drawing.Point(12, 341);
+            this.listViewDataObjects.MultiSelect = false;
             this.listViewDataObjects.Name = "listViewDataObjects";
             this.listViewDataObjects.Size = new System.Drawing.Size(518, 144);
             this.listViewDataObjects.TabIndex = 12;
             this.listViewDataObjects.UseCompatibleStateImageBehavior = false;
+            this.listViewDataObjects.View = System.Windows.Forms.View.Details;
             // 
             // btnReadTokenData
             // 
@@ -187,11 +194,16 @@
             this.btnReadTokenData.UseVisualStyleBackColor = true;
             this.btnReadTokenData.Click += new System.EventHandler(this.btnReadTokenData_Click);
             // 
+            // ObjectLabel
+            // 
+            this.ObjectLabel.Text = "Label";
+            this.ObjectLabel.Width = 300;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 497);
+            this.ClientSize = new System.Drawing.Size(542, 522);
             this.Controls.Add(this.btnReadTokenData);
             this.Controls.Add(this.listViewDataObjects);
             this.Controls.Add(this.label3);
@@ -233,6 +245,7 @@
         private System.Windows.Forms.ColumnHeader TokenModel;
         private System.Windows.Forms.ColumnHeader TokenLabel;
         private System.Windows.Forms.Button btnReadTokenData;
+        private System.Windows.Forms.ColumnHeader ObjectLabel;
     }
 }
 
