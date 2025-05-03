@@ -29,6 +29,7 @@ namespace WindowsForms_pkcs11admin
         {
             try
             {
+                listViewTokens.Items.Clear();
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
                 if (ofd.ShowDialog() == DialogResult.OK)
