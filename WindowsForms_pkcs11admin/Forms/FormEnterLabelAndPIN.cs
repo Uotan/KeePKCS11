@@ -5,38 +5,26 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsForms_pkcs11admin.Forms
 {
-    public partial class FormEnterPIN : Form
+    public partial class FormEnterLabelAndPIN : Form
     {
         public string enteredPIN { get; private set; }
-        public FormEnterPIN()
+        public string enteredObjectLabel { get; private set; }
+
+        public FormEnterLabelAndPIN()
         {
             InitializeComponent();
         }
 
-        
-
         private void btnOk_Click(object sender, EventArgs e)
         {
-            enteredPIN = tbxPinCode.Text; // Сохраняем текст
+            enteredPIN = tbxPinCode.Text;
+            enteredObjectLabel = tbxObjectLabel.Text;
             DialogResult = DialogResult.OK; // Закрываем с результатом OK
             Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void FormEnterPIN_Load(object sender, EventArgs e)
-        {
-            //tbxPinCode.PasswordChar = '*';
         }
 
         private void checkBoxDisplayPIN_CheckedChanged(object sender, EventArgs e)
@@ -45,11 +33,16 @@ namespace WindowsForms_pkcs11admin.Forms
             {
                 tbxPinCode.UseSystemPasswordChar = false;
             }
-            else if(!checkBoxDisplayPIN.Checked)
+            else if (!checkBoxDisplayPIN.Checked)
             {
                 tbxPinCode.UseSystemPasswordChar = true;
             }
-            
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

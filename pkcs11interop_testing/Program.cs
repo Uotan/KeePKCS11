@@ -27,13 +27,13 @@ namespace pkcs11interop_testing
 
             LessInitThisThing();
 
-            //CreateDestroyObjectTest();
+            //CreateObjectTest();
 
             //FindAllObjects();
 
 
             string keyValue = null;
-            keyValue = FindKeyObject();
+            keyValue = FindKeyObject("secret");
             Console.WriteLine(keyValue);
 
             Console.ReadKey();
@@ -48,7 +48,7 @@ namespace pkcs11interop_testing
                 slot = slots.FirstOrDefault();
             }
 
-            void CreateDestroyObjectTest()
+            void CreateObjectTest()
             {
 
                 // Open RW session
@@ -87,15 +87,15 @@ namespace pkcs11interop_testing
                     List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
                     searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
 
+                    List<ulong> attributes = new List<ulong>();
+                    attributes.Add((ulong)CKA.CKA_PRIVATE);
+                    attributes.Add((ulong)CKA.CKA_LABEL);
+                    attributes.Add((ulong)CKA.CKA_APPLICATION);
+                    attributes.Add((ulong)CKA.CKA_VALUE);
+
                     List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
                     foreach (var foundObject in foundObjects)
                     {
-                        List<ulong> attributes = new List<ulong>();
-                        attributes.Add((ulong)CKA.CKA_PRIVATE);
-                        attributes.Add((ulong)CKA.CKA_LABEL);
-                        attributes.Add((ulong)CKA.CKA_APPLICATION);
-                        attributes.Add((ulong)CKA.CKA_VALUE);
-
                         List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
                         Console.Write(requiredAttributes[1].GetValueAsString()+"\t");
                         Console.WriteLine(Encoding.UTF8.GetString(requiredAttributes[3].GetValueAsByteArray()));
@@ -107,7 +107,7 @@ namespace pkcs11interop_testing
             }
 
 
-            string FindKeyObject()
+            string FindKeyObject(string _keyObjectLabel)
             {
                 string _keyValue = null;
                 using (ISession session = slot.OpenSession(SessionType.ReadOnly))
@@ -118,26 +118,22 @@ namespace pkcs11interop_testing
                     List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
                     searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
 
+                    List<ulong> attributes = new List<ulong>();
+                    attributes.Add((ulong)CKA.CKA_PRIVATE);
+                    attributes.Add((ulong)CKA.CKA_LABEL);
+                    attributes.Add((ulong)CKA.CKA_APPLICATION);
+                    attributes.Add((ulong)CKA.CKA_VALUE);
+
                     List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
                     foreach (var foundObject in foundObjects)
                     {
-                        List<ulong> attributes = new List<ulong>();
-                        attributes.Add((ulong)CKA.CKA_PRIVATE);
-                        attributes.Add((ulong)CKA.CKA_LABEL);
-                        attributes.Add((ulong)CKA.CKA_APPLICATION);
-                        attributes.Add((ulong)CKA.CKA_VALUE);
-
                         List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
-                        if (requiredAttributes[1].GetValueAsString().Contains("key"))
+                        if (requiredAttributes[1].GetValueAsString().Contains(_keyObjectLabel.Trim()))
                         {
                             _keyValue = Encoding.UTF8.GetString(requiredAttributes[3].GetValueAsByteArray());
                         }
-                        break;
                     }
-
                     session.Logout();
-
-                    
                 }
                 return _keyValue;
 

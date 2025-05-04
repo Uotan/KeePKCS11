@@ -43,8 +43,10 @@
             this.TokenModel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TokenLabel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listViewDataObjects = new System.Windows.Forms.ListView();
-            this.btnReadTokenData = new System.Windows.Forms.Button();
             this.ObjectLabel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnReadTokenData = new System.Windows.Forms.Button();
+            this.btnCreateKey = new System.Windows.Forms.Button();
+            this.btnSelectKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,6 +174,7 @@
             // 
             this.listViewDataObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ObjectLabel});
+            this.listViewDataObjects.FullRowSelect = true;
             this.listViewDataObjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewDataObjects.HideSelection = false;
             this.listViewDataObjects.LabelWrap = false;
@@ -182,6 +185,11 @@
             this.listViewDataObjects.TabIndex = 12;
             this.listViewDataObjects.UseCompatibleStateImageBehavior = false;
             this.listViewDataObjects.View = System.Windows.Forms.View.Details;
+            // 
+            // ObjectLabel
+            // 
+            this.ObjectLabel.Text = "Label";
+            this.ObjectLabel.Width = 300;
             // 
             // btnReadTokenData
             // 
@@ -194,16 +202,33 @@
             this.btnReadTokenData.UseVisualStyleBackColor = true;
             this.btnReadTokenData.Click += new System.EventHandler(this.btnReadTokenData_Click);
             // 
-            // ObjectLabel
+            // btnCreateKey
             // 
-            this.ObjectLabel.Text = "Label";
-            this.ObjectLabel.Width = 300;
+            this.btnCreateKey.Location = new System.Drawing.Point(12, 491);
+            this.btnCreateKey.Name = "btnCreateKey";
+            this.btnCreateKey.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateKey.TabIndex = 14;
+            this.btnCreateKey.Text = "Create key";
+            this.btnCreateKey.UseVisualStyleBackColor = true;
+            this.btnCreateKey.Click += new System.EventHandler(this.btnCreateKey_Click);
+            // 
+            // btnSelectKey
+            // 
+            this.btnSelectKey.Location = new System.Drawing.Point(455, 491);
+            this.btnSelectKey.Name = "btnSelectKey";
+            this.btnSelectKey.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectKey.TabIndex = 15;
+            this.btnSelectKey.Text = "Select key";
+            this.btnSelectKey.UseVisualStyleBackColor = true;
+            this.btnSelectKey.Click += new System.EventHandler(this.btnSelectKey_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 522);
+            this.Controls.Add(this.btnSelectKey);
+            this.Controls.Add(this.btnCreateKey);
             this.Controls.Add(this.btnReadTokenData);
             this.Controls.Add(this.listViewDataObjects);
             this.Controls.Add(this.label3);
@@ -246,6 +271,8 @@
         private System.Windows.Forms.ColumnHeader TokenLabel;
         private System.Windows.Forms.Button btnReadTokenData;
         private System.Windows.Forms.ColumnHeader ObjectLabel;
+        private System.Windows.Forms.Button btnCreateKey;
+        private System.Windows.Forms.Button btnSelectKey;
     }
 }
 
