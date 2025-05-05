@@ -51,6 +51,7 @@
             this.tbxPinCode.Size = new System.Drawing.Size(269, 20);
             this.tbxPinCode.TabIndex = 0;
             this.tbxPinCode.UseSystemPasswordChar = true;
+            this.tbxPinCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxPinCode_KeyDown);
             // 
             // btnOk
             // 

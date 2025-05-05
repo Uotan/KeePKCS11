@@ -51,5 +51,13 @@ namespace WindowsForms_pkcs11admin.Forms
             }
             
         }
+
+        private void tbxPinCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnOk.PerformClick(); // Нажатие кнопки "ОК"
+            }
+        }
     }
 }
