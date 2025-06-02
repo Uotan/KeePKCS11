@@ -6,7 +6,7 @@ echo Current directory is: %CURRENT_DIR%
 
 cd KeePass-2.58
 
-KeePass.exe --plgx-create %CURRENT_DIR%KeePKCS11
+KeePass.exe --plgx-create %CURRENT_DIR%build
 
 echo KeePKCS11.plgx was created in %CURRENT_DIR%
 pause

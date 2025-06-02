@@ -37,17 +37,21 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@Kl9zd6dWwGI9oEUV2/z1QOXEqaQLdgq2nNpKHoN8XdA=@2.58.0.0@1</Item>
+			<Item>@UdklagZmrEj+y2cpUziQmI3l2JdkuL7vxKtZ07C82YI=@2.58.0.0@1</Item>
+			<Item>@xwRKMRE29w8BgdoN+Hxr2KY2BUpKWZRCnRChZ9YoKBQ=@2.58.0.0@1</Item>
+			<Item>@taXlM+OTW8uD38USjGZIGvxatvKWIv1dbhYnE1SXQJ4=@2.58.0.0@1</Item>
+			<Item>@wp3fGc0CK73jW21hf8JppUhEjnbQspMBs2fvYQhfbLM=@2.58.0.0@1</Item>
 			<Item>@V8mKyKSnEiWA12um+YJofPSX1T5h14bG9hrOg2vHT+o=@2.58.0.0@1</Item>
 			<Item>@LujxNibROsUlrxmFhIEdELUzfXpTJuP0pNAPJrEAkOg=@2.58.0.0@1</Item>
 		</PluginCompatibility>
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>-16381</X>
-		<Y>-16381</Y>
-		<Width>-16381</Width>
-		<Height>-16381</Height>
-		<Maximized>true</Maximized>
+		<X>-8</X>
+		<Y>0</Y>
+		<Width>670</Width>
+		<Height>525</Height>
 		<SplitterHorizontalFrac>0.7241014799154335</SplitterHorizontalFrac>
 		<SplitterVerticalFrac>0.25</SplitterVerticalFrac>
 		<ToolBar />

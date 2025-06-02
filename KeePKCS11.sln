@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeePKCS11", "KeePKCS11\KeePKCS11.csproj", "{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeeTest", "KeeTest\KeeTest.csproj", "{D41D297F-BEED-488B-97A8-931A556A4DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41D297F-BEED-488B-97A8-931A556A4DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41D297F-BEED-488B-97A8-931A556A4DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41D297F-BEED-488B-97A8-931A556A4DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41D297F-BEED-488B-97A8-931A556A4DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

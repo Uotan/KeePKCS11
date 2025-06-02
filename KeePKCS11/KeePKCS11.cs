@@ -26,7 +26,7 @@ namespace KeePKCS11
             try
             {
                 // Формируем имя ресурса: ПространствоИмен.Папка.Файл.dll
-                string resourceName = "KeePKCS11.Lib.Pkcs11Interop.dll";
+                string resourceName = "KeePKCS11.Library.Pkcs11Interop.dll";
 
                 using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
                 {

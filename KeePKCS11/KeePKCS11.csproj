@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KeePKCS11</RootNamespace>
     <AssemblyName>KeePKCS11</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -39,7 +39,8 @@
       <HintPath>..\KeePass-2.58\KeePass.exe</HintPath>
     </Reference>
     <Reference Include="Pkcs11Interop, Version=5.3.0.0, Culture=neutral, PublicKeyToken=c10e9c2d8c006d2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pkcs11Interop.5.3.0\lib\net20\Pkcs11Interop.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\Pkcs11Interop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -110,8 +111,12 @@
     <None Include="Resources\pkcs11_token.gif" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Library\Pkcs11Interop.dll" />
-    <EmbeddedResource Include="Library\Pkcs11Interop.xml" />
+    <EmbeddedResource Include="Library\Pkcs11Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Library\Pkcs11Interop.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
