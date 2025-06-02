@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KeePKCS11</RootNamespace>
     <AssemblyName>KeePKCS11</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -34,8 +34,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeePass">
-      <HintPath>keepass\KeePass.exe</HintPath>
+    <Reference Include="KeePass, Version=2.58.0.0, Culture=neutral, PublicKeyToken=fed2ed7716aecf5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\KeePass-2.58\KeePass.exe</HintPath>
+    </Reference>
+    <Reference Include="Pkcs11Interop, Version=5.3.0.0, Culture=neutral, PublicKeyToken=c10e9c2d8c006d2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pkcs11Interop.5.3.0\lib\net20\Pkcs11Interop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +53,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Crc32.cs" />
+    <Compile Include="Forms\FormEnterLabelAndPIN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEnterLabelAndPIN.Designer.cs">
+      <DependentUpon>FormEnterLabelAndPIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfirmKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfirmKey.Designer.cs">
+      <DependentUpon>FormConfirmKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEnterPIN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEnterPIN.Designer.cs">
+      <DependentUpon>FormEnterPIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCreateOrSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCreateOrSelect.Designer.cs">
+      <DependentUpon>FormCreateOrSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="KeePKCS11.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -58,16 +87,31 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FormEnterLabelAndPIN.resx">
+      <DependentUpon>FormEnterLabelAndPIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfirmKey.resx">
+      <DependentUpon>FormConfirmKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEnterPIN.resx">
+      <DependentUpon>FormEnterPIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCreateOrSelect.resx">
+      <DependentUpon>FormCreateOrSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Forms\" />
+    <None Include="packages.config" />
+    <None Include="Resources\pkcs11_token.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pkcs11_token.gif" />
+    <EmbeddedResource Include="Library\Pkcs11Interop.dll" />
+    <EmbeddedResource Include="Library\Pkcs11Interop.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

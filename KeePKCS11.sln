@@ -5,16 +5,6 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeePKCS11", "KeePKCS11\KeePKCS11.csproj", "{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pkcs11interop_testing", "pkcs11interop_testing\pkcs11interop_testing.csproj", "{7B4E39B4-D3E4-46E6-987B-C691DCC8E247}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptokiKeyProvider", "CryptokiKeyProvider\CryptokiKeyProvider.csproj", "{86B49581-1D6E-4E41-9BBF-E90A7978E07F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pkcs11interop_X", "pkcs11interop_X\pkcs11interop_X.csproj", "{40C6E450-13EB-4DCB-B164-2905C13C65E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsForms_pkcs11admin", "WindowsForms_pkcs11admin\WindowsForms_pkcs11admin.csproj", "{950FFE06-A025-4C3D-B4C5-077678E808F4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{0344C319-9AB8-4144-BC6A-17A8ED7F2B53}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,26 +15,6 @@ Global
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDEE4CDE-4E20-4E16-BFC6-8813F7A95C5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B4E39B4-D3E4-46E6-987B-C691DCC8E247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B4E39B4-D3E4-46E6-987B-C691DCC8E247}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B4E39B4-D3E4-46E6-987B-C691DCC8E247}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4E39B4-D3E4-46E6-987B-C691DCC8E247}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86B49581-1D6E-4E41-9BBF-E90A7978E07F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40C6E450-13EB-4DCB-B164-2905C13C65E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{950FFE06-A025-4C3D-B4C5-077678E808F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{950FFE06-A025-4C3D-B4C5-077678E808F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{950FFE06-A025-4C3D-B4C5-077678E808F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{950FFE06-A025-4C3D-B4C5-077678E808F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0344C319-9AB8-4144-BC6A-17A8ED7F2B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0344C319-9AB8-4144-BC6A-17A8ED7F2B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0344C319-9AB8-4144-BC6A-17A8ED7F2B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0344C319-9AB8-4144-BC6A-17A8ED7F2B53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
