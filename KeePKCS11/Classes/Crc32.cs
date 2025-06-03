@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace KeePKCS11.Classes
+namespace KeePKCS11KeyProvider.Classes
 {
     public class Crc32 : HashAlgorithm
     {

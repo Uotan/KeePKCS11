@@ -1,4 +1,4 @@
-﻿namespace KeePKCS11.Forms
+﻿namespace KeePKCS11KeyProvider.Forms
 {
     partial class FormEnterPIN
     {

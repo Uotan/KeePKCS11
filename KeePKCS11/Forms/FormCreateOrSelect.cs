@@ -1,6 +1,6 @@
 ﻿using KeePass.Plugins;
 using KeePass.UI;
-using KeePKCS11.Forms;
+using KeePKCS11KeyProvider.Forms;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace KeePKCS11
+namespace KeePKCS11KeyProvider
 {
     public partial class FormCreateOrSelect : Form
     {
@@ -199,7 +199,7 @@ namespace KeePKCS11
 
             
             string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
-            KeePKCS11.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
+            KeePKCS11KeyProvider.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
             keyByteArray = Encoding.ASCII.GetBytes(keyValue);
             DialogResult = DialogResult.OK; // Закрываем с результатом OK
             Close();

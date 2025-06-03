@@ -5,9 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
-using KeePKCS11.Classes;
+using KeePKCS11KeyProvider.Classes;
 
-namespace KeePKCS11.Forms
+namespace KeePKCS11KeyProvider.Forms
 {
     public partial class FormEnterLabelAndPIN : Form
     {

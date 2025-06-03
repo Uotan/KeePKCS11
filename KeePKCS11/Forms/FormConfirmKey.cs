@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace KeePKCS11.Forms
+namespace KeePKCS11KeyProvider.Forms
 {
     public partial class FormConfirmKey : Form
     {

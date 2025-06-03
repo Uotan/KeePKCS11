@@ -1,4 +1,4 @@
-﻿namespace KeePKCS11
+﻿namespace KeePKCS11KeyProvider
 {
     partial class FormCreateOrSelect
     {
@@ -105,7 +105,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::KeePKCS11.Properties.Resources.pkcs11_token;
+            this.pictureBox1.Image = global::KeePKCS11KeyProvider.Properties.Resources.pkcs11_token;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(106, 118);
