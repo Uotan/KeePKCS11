@@ -60,6 +60,12 @@
     <Compile Include="Forms\FormConfirmKey.Designer.cs">
       <DependentUpon>FormConfirmKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormCreateOrSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCreateOrSelect.Designer.cs">
+      <DependentUpon>FormCreateOrSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormEnterLabelAndPIN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\FormConfirmKey.resx">
       <DependentUpon>FormConfirmKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCreateOrSelect.resx">
+      <DependentUpon>FormCreateOrSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEnterLabelAndPIN.resx">
       <DependentUpon>FormEnterLabelAndPIN.cs</DependentUpon>

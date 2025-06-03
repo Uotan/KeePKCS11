@@ -12,8 +12,8 @@ namespace KeePKCS11KeyProvider.Forms
     public partial class FormEnterLabelAndPIN : Form
     {
 
-        public string enteredPIN { get; private set; }
-        public string enteredObjectLabel { get; private set; }
+        public String enteredPIN;
+        public String enteredObjectLabel;
 
         public FormEnterLabelAndPIN()
         {

@@ -7,7 +7,7 @@ namespace KeePKCS11KeyProvider.Forms
 {
     public partial class FormEnterPIN : Form
     {
-        public string enteredPIN { get; private set; }
+        public String enteredPIN;
         public FormEnterPIN()
         {
             InitializeComponent();
