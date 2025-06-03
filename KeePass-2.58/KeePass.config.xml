@@ -4,18 +4,28 @@
 		<Version>2.58</Version>
 		<PreferUserConfiguration>false</PreferUserConfiguration>
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
-		<DpiFactorX>1.25</DpiFactorX>
-		<DpiFactorY>1.25</DpiFactorY>
+		<DpiFactorX>1</DpiFactorX>
+		<DpiFactorY>1</DpiFactorY>
 	</Meta>
 	<Application>
 		<LastUsedFile>
-			<Path>C:\Users\Admin\Desktop\Database.kdbx</Path>
+			<Path>Test base\Database33333.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
 			<CredSaveMode>NoSave</CredSaveMode>
 		</LastUsedFile>
 		<MostRecentlyUsed>
 			<MaxItemCount>12</MaxItemCount>
 			<Items>
+				<ConnectionInfo>
+					<Path>Test base\Database33333.kdbx</Path>
+					<CredProtMode>Obf</CredProtMode>
+					<CredSaveMode>NoSave</CredSaveMode>
+				</ConnectionInfo>
+				<ConnectionInfo>
+					<Path>Test base\Database.kdbx</Path>
+					<CredProtMode>Obf</CredProtMode>
+					<CredSaveMode>NoSave</CredSaveMode>
+				</ConnectionInfo>
 				<ConnectionInfo>
 					<Path>C:\Users\Admin\Desktop\Database.kdbx</Path>
 					<CredProtMode>Obf</CredProtMode>
@@ -29,7 +39,7 @@
 			</Items>
 		</MostRecentlyUsed>
 		<WorkingDirectories>
-			<Item>Database@C:\Users\Admin\Desktop</Item>
+			<Item>Database@Test base</Item>
 			<Item>KeyFile@..\..\..\Документы</Item>
 		</WorkingDirectories>
 		<Start>
@@ -42,6 +52,9 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@9PSHMAUwYVwFHkwYna4lDNBMu9omyWgLepcRFq5ovYI=@2.58.0.0@1</Item>
+			<Item>@ySG0YePzROy8sJGH1a50VDXOupTZTLCbiQNSRCtBgXw=@2.58.0.0@1</Item>
+			<Item>@GOuLOuFPixEZu6CV9k22y0djpIpNrQ6jE9W5Oyc7g7g=@2.58.0.0@1</Item>
 			<Item>@7WX+euuQTgmmlu7yORewN8WahoL2MAhn90MFCDWdzGM=@2.58.0.0@1</Item>
 			<Item>@VKSmxexixbHHaIE0YtnYy0mcVulCitCCeKWj9qJi8fM=@2.58.0.0@1</Item>
 			<Item>@g9qEeM12BivmJuikAnP9fBY3KrSSMM/0t3/ldEXPt4I=@2.58.0.0@1</Item>
@@ -85,10 +98,11 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>541</X>
-		<Y>187</Y>
-		<Width>838</Width>
-		<Height>656</Height>
+		<X>433</X>
+		<Y>150</Y>
+		<Width>670</Width>
+		<Height>525</Height>
+		<Maximized>true</Maximized>
 		<SplitterHorizontalFrac>0.7241014799154335</SplitterHorizontalFrac>
 		<SplitterVerticalFrac>0.25</SplitterVerticalFrac>
 		<ToolBar />
@@ -97,24 +111,24 @@
 		<EntryListColumnCollection>
 			<Column>
 				<Type>Title</Type>
-				<Width>326</Width>
+				<Width>261</Width>
 			</Column>
 			<Column>
 				<Type>UserName</Type>
-				<Width>235</Width>
+				<Width>188</Width>
 			</Column>
 			<Column>
 				<Type>Password</Type>
-				<Width>112</Width>
+				<Width>90</Width>
 				<HideWithAsterisks>true</HideWithAsterisks>
 			</Column>
 			<Column>
 				<Type>Url</Type>
-				<Width>536</Width>
+				<Width>429</Width>
 			</Column>
 			<Column>
 				<Type>Notes</Type>
-				<Width>112</Width>
+				<Width>90</Width>
 			</Column>
 		</EntryListColumnCollection>
 		<EntryListColumnDisplayOrder>0 1 2 3 4</EntryListColumnDisplayOrder>
@@ -188,6 +202,14 @@
 				<DatabasePath>C:\Users\Admin\Desktop\Database.kdbx</DatabasePath>
 				<KeyProvider>KeePKCS11KeyProvider</KeyProvider>
 			</Association>
+			<Association>
+				<DatabasePath>Test base\Database.kdbx</DatabasePath>
+				<KeyProvider>KeePKCS11</KeyProvider>
+			</Association>
+			<Association>
+				<DatabasePath>Test base\Database33333.kdbx</DatabasePath>
+				<KeyProvider>KeePKCS11</KeyProvider>
+			</Association>
 		</KeySources>
 		<Duplication />
 		<Print>
@@ -224,6 +246,30 @@
 		<Item>
 			<Key>KeePKCS11.DESKTOP-11CC8CV.DESKTOP-11CC8CV.Admin.Database.kdbx.keepkcs11_object_label</Key>
 			<Value>252FDA81</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_lib_path</Key>
+			<Value>C:\Windows\System32\rtPKCS11ECP.dll</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_token_sn_id</Key>
+			<Value>3e8f4bca</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_object_label</Key>
+			<Value>B37446C8</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_lib_path</Key>
+			<Value>C:\Windows\System32\rtPKCS11ECP.dll</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_token_sn_id</Key>
+			<Value>3e8f4bca</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_object_label</Key>
+			<Value>My key 2025</Value>
 		</Item>
 	</Custom>
 </Configuration>
