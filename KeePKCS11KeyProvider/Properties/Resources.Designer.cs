@@ -59,5 +59,15 @@ namespace KeePKCS11KeyProvider.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pkcs11_token {
+            get {
+                object obj = ResourceManager.GetObject("pkcs11_token", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

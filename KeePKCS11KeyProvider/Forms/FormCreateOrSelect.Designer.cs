@@ -34,6 +34,7 @@
             this.lblLibraryManufacturer = new System.Windows.Forms.Label();
             this.lblLibraryVersion = new System.Windows.Forms.Label();
             this.lblCryptokiVersion = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.listViewTokens = new System.Windows.Forms.ListView();
@@ -46,6 +47,7 @@
             this.btnReadTokenData = new System.Windows.Forms.Button();
             this.btnCreateKey = new System.Windows.Forms.Button();
             this.btnSelectKey = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGetLibraryInfo
@@ -100,6 +102,16 @@
             this.lblCryptokiVersion.Size = new System.Drawing.Size(94, 13);
             this.lblCryptokiVersion.TabIndex = 5;
             this.lblCryptokiVersion.Text = "PKCS#11 version:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KeePKCS11KeyProvider.Properties.Resources.pkcs11_token;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(106, 118);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // label2
             // 
@@ -222,6 +234,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listViewTokens);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblCryptokiVersion);
             this.Controls.Add(this.lblLibraryVersion);
             this.Controls.Add(this.lblLibraryManufacturer);
@@ -233,6 +246,7 @@
             this.Name = "FormCreateOrSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "pkcs#11 test editor";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,6 +260,7 @@
         private System.Windows.Forms.Label lblLibraryManufacturer;
         private System.Windows.Forms.Label lblLibraryVersion;
         private System.Windows.Forms.Label lblCryptokiVersion;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView listViewTokens;

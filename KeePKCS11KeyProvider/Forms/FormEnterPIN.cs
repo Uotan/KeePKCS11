@@ -1,7 +1,6 @@
-﻿using KeePass.UI;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Windows.Forms;
+using KeePass.UI;
 
 namespace KeePKCS11KeyProvider.Forms
 {
@@ -18,13 +17,10 @@ namespace KeePKCS11KeyProvider.Forms
         private void btnOk_Click(object sender, EventArgs e)
         {
             enteredPIN = tbxPinCode.Text; // Сохраняем текст
-            DialogResult = DialogResult.OK; // Закрываем с результатом OK
-            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
             Close();
         }
 

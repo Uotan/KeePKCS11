@@ -4,8 +4,8 @@
 		<Version>2.58</Version>
 		<PreferUserConfiguration>false</PreferUserConfiguration>
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
-		<DpiFactorX>1</DpiFactorX>
-		<DpiFactorY>1</DpiFactorY>
+		<DpiFactorX>1.25</DpiFactorX>
+		<DpiFactorY>1.25</DpiFactorY>
 	</Meta>
 	<Application>
 		<LastUsedFile>
@@ -25,7 +25,7 @@
 		</MostRecentlyUsed>
 		<WorkingDirectories>
 			<Item>Database@C:\Users\Admin\Desktop</Item>
-			<Item>KeyFile@..\..\..\..\Документы</Item>
+			<Item>KeyFile@..\..\..\Документы</Item>
 		</WorkingDirectories>
 		<Start>
 			<CheckForUpdate>false</CheckForUpdate>
@@ -37,6 +37,25 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@g9qEeM12BivmJuikAnP9fBY3KrSSMM/0t3/ldEXPt4I=@2.58.0.0@1</Item>
+			<Item>@uPON2z26DeGVf/QbzLkS7nEBTHfJAMYoMyvak4Yh6AQ=@2.58.0.0@1</Item>
+			<Item>@wzsaE/dtlL8vUtq8kxgpO9VlQJX6sLi9gxy54SQawus=@2.58.0.0@1</Item>
+			<Item>@JA+7pgP1XjXGXpXea5VDmibvIqF0Y8BCpJcLDvaOWkQ=@2.58.0.0@1</Item>
+			<Item>@+DBNs/ILyZEogU1lTskf/qXoR+aZWXBxSXcbLLK/QiA=@2.58.0.0@1</Item>
+			<Item>@tbYe/tRKSfEnyWb2pspX8O0yhbTeSVzM2JtEljyffV8=@2.58.0.0@1</Item>
+			<Item>@ftu1dshhmFFTHkoTruZXvAUIIvpk8LgTbabE0Xoz3xc=@2.58.0.0@1</Item>
+			<Item>@kGZ9HXkcrkdmFDfnycfubVduEuHdwBQIIBT1Zh4Nc9Q=@2.58.0.0@1</Item>
+			<Item>@Jthk2WeT/avNrsJ9ALiHRzzxFWyQtpHHwCV6D+Dxt5g=@2.58.0.0@1</Item>
+			<Item>@CS6WzMX8NpCFeyDi9LIzUv4LSCXMWx0E52p8t8nnRD8=@2.58.0.0@1</Item>
+			<Item>@fujuHnrHlzSYNMmtJwdw47CgQrVq3XijzkuftLroSt8=@2.58.0.0@1</Item>
+			<Item>@RGNIn3QQigwTf1kg5P5FQpYmmZ1wSkMB4uvdBBhnT/Q=@2.58.0.0@1</Item>
+			<Item>@Pb9IIKDc9ebj3HqlaF0ken1fEU9qup0AIo++PdrRN9w=@2.58.0.0@1</Item>
+			<Item>@374U09rH2akknasVBn3KJvT2Kn6SsnVP/IM6GX7VSUI=@2.58.0.0@1</Item>
+			<Item>@9FNeY3nrRrqHGlTo2u9hJ3kZtzhqen/Zy1ExPPtbWXg=@2.58.0.0@1</Item>
+			<Item>@DD9Bkei3NHAM3+/DNg15LS4CejQB9Pp2ZkUC/kJgMO8=@2.58.0.0@1</Item>
+			<Item>@AcH4w5Rid20NzzjCh0Tswx+as1qLzMLkGo6Rg3t1awY=@2.58.0.0@1</Item>
+			<Item>@OYwbbXybDj6xKXebWaKgTKh7p3gXHUlgTqhqSlO86ZM=@2.58.0.0@1</Item>
+			<Item>@BZo4efFSeFhEEeUU9IzP5VPAvOh1zWqGJsvagW4H66Q=@2.58.0.0@1</Item>
 			<Item>@8kXmsnkaZ/5IDXBjXq7Mi2pdFdaedOG6vhRCw/bM0uc=@2.58.0.0@1</Item>
 			<Item>@rgdazFttcaRMXQ6BzcItJxDQ1oUJrw9fChufH2dhyqk=@2.58.0.0@1</Item>
 			<Item>@ToH0sSvHe8obixExG2kKAVyadGAP6ow+LUDX5sEz8wU=@2.58.0.0@1</Item>
@@ -59,10 +78,10 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>-1236</X>
-		<Y>210</Y>
-		<Width>670</Width>
-		<Height>525</Height>
+		<X>541</X>
+		<Y>187</Y>
+		<Width>838</Width>
+		<Height>656</Height>
 		<SplitterHorizontalFrac>0.7241014799154335</SplitterHorizontalFrac>
 		<SplitterVerticalFrac>0.25</SplitterVerticalFrac>
 		<ToolBar />
@@ -71,24 +90,24 @@
 		<EntryListColumnCollection>
 			<Column>
 				<Type>Title</Type>
-				<Width>261</Width>
+				<Width>326</Width>
 			</Column>
 			<Column>
 				<Type>UserName</Type>
-				<Width>188</Width>
+				<Width>235</Width>
 			</Column>
 			<Column>
 				<Type>Password</Type>
-				<Width>90</Width>
+				<Width>112</Width>
 				<HideWithAsterisks>true</HideWithAsterisks>
 			</Column>
 			<Column>
 				<Type>Url</Type>
-				<Width>429</Width>
+				<Width>536</Width>
 			</Column>
 			<Column>
 				<Type>Notes</Type>
-				<Width>90</Width>
+				<Width>112</Width>
 			</Column>
 		</EntryListColumnCollection>
 		<EntryListColumnDisplayOrder>0 1 2 3 4</EntryListColumnDisplayOrder>
@@ -156,7 +175,7 @@
 			<Association>
 				<DatabasePath>E:\YandexDisk\Data\my_db.kdbx</DatabasePath>
 				<Password>true</Password>
-				<KeyFilePath>..\..\..\..\Документы\kpxc_key.keyx</KeyFilePath>
+				<KeyFilePath>..\..\..\Документы\kpxc_key.keyx</KeyFilePath>
 			</Association>
 		</KeySources>
 		<Duplication />

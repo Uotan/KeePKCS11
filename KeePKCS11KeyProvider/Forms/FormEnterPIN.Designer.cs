@@ -38,17 +38,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 23);
+            this.label1.Location = new System.Drawing.Point(16, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.Size = new System.Drawing.Size(95, 16);
             this.label1.TabIndex = 14;
             this.label1.Text = "Enter your PIN:";
             // 
             // tbxPinCode
             // 
-            this.tbxPinCode.Location = new System.Drawing.Point(15, 39);
+            this.tbxPinCode.Location = new System.Drawing.Point(20, 48);
+            this.tbxPinCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbxPinCode.Name = "tbxPinCode";
-            this.tbxPinCode.Size = new System.Drawing.Size(269, 20);
+            this.tbxPinCode.Size = new System.Drawing.Size(357, 22);
             this.tbxPinCode.TabIndex = 0;
             this.tbxPinCode.UseSystemPasswordChar = true;
             this.tbxPinCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxPinCode_KeyDown);
@@ -56,9 +58,10 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(125, 93);
+            this.btnOk.Location = new System.Drawing.Point(167, 114);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(100, 28);
             this.btnOk.TabIndex = 12;
             this.btnOk.Text = "&OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(206, 93);
+            this.btnCancel.Location = new System.Drawing.Point(275, 114);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -78,9 +82,10 @@
             // checkBoxDisplayPIN
             // 
             this.checkBoxDisplayPIN.AutoSize = true;
-            this.checkBoxDisplayPIN.Location = new System.Drawing.Point(15, 66);
+            this.checkBoxDisplayPIN.Location = new System.Drawing.Point(20, 81);
+            this.checkBoxDisplayPIN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBoxDisplayPIN.Name = "checkBoxDisplayPIN";
-            this.checkBoxDisplayPIN.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxDisplayPIN.Size = new System.Drawing.Size(100, 20);
             this.checkBoxDisplayPIN.TabIndex = 15;
             this.checkBoxDisplayPIN.Text = "Display PIN";
             this.checkBoxDisplayPIN.UseVisualStyleBackColor = true;
@@ -88,15 +93,16 @@
             // 
             // FormEnterPIN
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 138);
+            this.ClientSize = new System.Drawing.Size(403, 170);
             this.Controls.Add(this.checkBoxDisplayPIN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbxPinCode);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormEnterPIN";
