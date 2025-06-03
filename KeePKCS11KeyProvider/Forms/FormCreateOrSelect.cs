@@ -209,7 +209,7 @@ namespace KeePKCS11KeyProvider.Forms
 
 
             string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
-            //KeePKCS11KeyProvider.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
+            KeePKCS11KeyProvider.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
             keyByteArray = Encoding.ASCII.GetBytes(keyValue);
             DialogResult = DialogResult.OK; // Закрываем с результатом OK
             Close();

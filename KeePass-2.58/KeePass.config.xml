@@ -9,13 +9,18 @@
 	</Meta>
 	<Application>
 		<LastUsedFile>
-			<Path>E:\YandexDisk\Data\my_db.kdbx</Path>
+			<Path>C:\Users\Admin\Desktop\Database.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
 			<CredSaveMode>NoSave</CredSaveMode>
 		</LastUsedFile>
 		<MostRecentlyUsed>
 			<MaxItemCount>12</MaxItemCount>
 			<Items>
+				<ConnectionInfo>
+					<Path>C:\Users\Admin\Desktop\Database.kdbx</Path>
+					<CredProtMode>Obf</CredProtMode>
+					<CredSaveMode>NoSave</CredSaveMode>
+				</ConnectionInfo>
 				<ConnectionInfo>
 					<Path>E:\YandexDisk\Data\my_db.kdbx</Path>
 					<CredProtMode>Obf</CredProtMode>
@@ -37,6 +42,8 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@7WX+euuQTgmmlu7yORewN8WahoL2MAhn90MFCDWdzGM=@2.58.0.0@1</Item>
+			<Item>@VKSmxexixbHHaIE0YtnYy0mcVulCitCCeKWj9qJi8fM=@2.58.0.0@1</Item>
 			<Item>@g9qEeM12BivmJuikAnP9fBY3KrSSMM/0t3/ldEXPt4I=@2.58.0.0@1</Item>
 			<Item>@uPON2z26DeGVf/QbzLkS7nEBTHfJAMYoMyvak4Yh6AQ=@2.58.0.0@1</Item>
 			<Item>@wzsaE/dtlL8vUtq8kxgpO9VlQJX6sLi9gxy54SQawus=@2.58.0.0@1</Item>
@@ -177,6 +184,10 @@
 				<Password>true</Password>
 				<KeyFilePath>..\..\..\Документы\kpxc_key.keyx</KeyFilePath>
 			</Association>
+			<Association>
+				<DatabasePath>C:\Users\Admin\Desktop\Database.kdbx</DatabasePath>
+				<KeyProvider>KeePKCS11KeyProvider</KeyProvider>
+			</Association>
 		</KeySources>
 		<Duplication />
 		<Print>
@@ -201,5 +212,18 @@
 		</UrlSchemeOverrides>
 		<AutoTypeAbortOnWindows />
 	</Integration>
-	<Custom />
+	<Custom>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-11CC8CV.DESKTOP-11CC8CV.Admin.Database.kdbx.keepkcs11_lib_path</Key>
+			<Value>C:\Windows\System32\jcPKCS11-2.dll</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-11CC8CV.DESKTOP-11CC8CV.Admin.Database.kdbx.keepkcs11_token_sn_id</Key>
+			<Value>0204FA35</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-11CC8CV.DESKTOP-11CC8CV.Admin.Database.kdbx.keepkcs11_object_label</Key>
+			<Value>252FDA81</Value>
+		</Item>
+	</Custom>
 </Configuration>
