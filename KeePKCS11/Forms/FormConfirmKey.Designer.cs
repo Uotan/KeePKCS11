@@ -89,6 +89,7 @@
             // 
             // btnChangeKey
             // 
+            this.btnChangeKey.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnChangeKey.Location = new System.Drawing.Point(125, 85);
             this.btnChangeKey.Name = "btnChangeKey";
             this.btnChangeKey.Size = new System.Drawing.Size(156, 23);
