@@ -214,6 +214,7 @@
             // 
             // btnSelectKey
             // 
+            this.btnSelectKey.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSelectKey.Location = new System.Drawing.Point(415, 491);
             this.btnSelectKey.Name = "btnSelectKey";
             this.btnSelectKey.Size = new System.Drawing.Size(115, 23);

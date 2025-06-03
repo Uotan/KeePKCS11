@@ -33,6 +33,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.checkBoxDisplayPIN = new System.Windows.Forms.CheckBox();
+            this.btnChangeKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +57,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(125, 93);
+            this.btnOk.Location = new System.Drawing.Point(125, 114);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 12;
@@ -67,7 +68,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(206, 93);
+            this.btnCancel.Location = new System.Drawing.Point(206, 114);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 11;
@@ -86,11 +87,22 @@
             this.checkBoxDisplayPIN.UseVisualStyleBackColor = true;
             this.checkBoxDisplayPIN.CheckedChanged += new System.EventHandler(this.checkBoxDisplayPIN_CheckedChanged);
             // 
+            // btnChangeKey
+            // 
+            this.btnChangeKey.Location = new System.Drawing.Point(125, 85);
+            this.btnChangeKey.Name = "btnChangeKey";
+            this.btnChangeKey.Size = new System.Drawing.Size(156, 23);
+            this.btnChangeKey.TabIndex = 16;
+            this.btnChangeKey.Text = "&Change key";
+            this.btnChangeKey.UseVisualStyleBackColor = true;
+            this.btnChangeKey.Click += new System.EventHandler(this.btnChangeKey_Click);
+            // 
             // FormConfirmKey
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 138);
+            this.ClientSize = new System.Drawing.Size(302, 150);
+            this.Controls.Add(this.btnChangeKey);
             this.Controls.Add(this.checkBoxDisplayPIN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbxPinCode);
@@ -114,5 +126,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox checkBoxDisplayPIN;
+        private System.Windows.Forms.Button btnChangeKey;
     }
 }

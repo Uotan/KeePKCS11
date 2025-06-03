@@ -3,6 +3,7 @@ using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace KeePKCS11.Forms
@@ -49,13 +50,11 @@ namespace KeePKCS11.Forms
                 MessageBox.Show(ex.Message);
                 throw;
             }
-            DialogResult = DialogResult.OK; // Закрываем с результатом OK
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -121,6 +120,17 @@ namespace KeePKCS11.Forms
             }
             return null;
 
+        }
+
+        private void btnChangeKey_Click(object sender, EventArgs e)
+        {
+            FormCreateOrSelect dialog = new FormCreateOrSelect();
+
+            if (UIUtil.ShowDialogAndDestroy(dialog) == DialogResult.OK)
+            {
+                keyByteArray = dialog.keyByteArray;
+            }
+            Close();
         }
     }
 }

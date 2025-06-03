@@ -53,10 +53,11 @@ namespace KeePKCS11.Forms
         private void btnGetLibraryInfo_Click(object sender, EventArgs e)
         {
             listViewTokens.Items.Clear();
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
-            if (ofd.ShowDialog() == DialogResult.OK)
-                this.tbxLibraryPath.Text = ofd.FileName;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = @"C:\Windows\System32";
+            openFileDialog.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                this.tbxLibraryPath.Text = openFileDialog.FileName;
 
             factories = new Pkcs11InteropFactories();
 
@@ -203,12 +204,9 @@ namespace KeePKCS11.Forms
                 MessageBox.Show("PIN code entry cancelled");
                 return;
             }
-
-
             string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
             KeePKCS11.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
             keyByteArray = Encoding.ASCII.GetBytes(keyValue);
-            DialogResult = DialogResult.OK; // Закрываем с результатом OK
             Close();
         }
 
