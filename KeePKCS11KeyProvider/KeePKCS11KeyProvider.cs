@@ -16,8 +16,6 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using KeePKCS11KeyProvider.Forms;
-using cryptotest;
 using KeePass.Plugins;
 using KeePass.UI;
 using KeePassLib.Keys;
@@ -105,76 +103,25 @@ namespace KeePKCS11KeyProvider
 
         public override byte[] GetKey(KeyProviderQueryContext ctx)
         {
-            try
-            {
-                KeePKCS11KeyProvider.database_name = Path.GetFileName(ctx.DatabasePath);
-                
-                getSettings();
 
-                if (ctx.CreatingNewKey)
-                {
-                    return Create(ctx);
-                }
-                else
-                {
-                    return Open(ctx);
-                }
-            }
-            catch (Exception ex) { MessageService.ShowWarning(ex.Message); }
-           
             return null;
         }
 
         private static byte[] Create(KeyProviderQueryContext ctx)
         {
-            CkpCreationForm dialog = new CkpCreationForm(m_host, Path.GetFileName(ctx.DatabasePath));
-
-            if (UIUtil.ShowDialogAndDestroy(dialog) != DialogResult.OK)
-                return null;
-
-            getSettings();
-
-            try
-            {
-                return pkcs11.pkcs11_read_key(pkcs11_conf_lib, pkcs11_conf_label);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            return dialog.selected_key;
+            return null;
         }
 
         public static void getSettings() {
 
-            string configBase = "KeePKCS11KeyProvider.";
-            string strRef =
-                Environment.MachineName + "." +
-                Environment.UserDomainName + "." +
-                Environment.UserName + ".";
 
-                pkcs11_conf_lib = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_library");
-                pkcs11_conf_slot = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_slot");
-                pkcs11_conf_label = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_label");
 
         }
 
 
         public static void saveSettings(string lib, string slot, string label)
         {
-            string configBase = "KeePKCS11KeyProvider.";
-            string strRef =
-                Environment.MachineName + "." +
-                Environment.UserDomainName + "." +
-                Environment.UserName + ".";
-            string pkcs11_conf_lib = configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_library";
-            string pkcs11_conf_slot = configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_slot";
-            string pkcs11_conf_label = configBase + strRef + KeePKCS11KeyProvider.database_name + ".pkcs11_label";
 
-            m_host.CustomConfig.SetString(pkcs11_conf_lib, lib);
-            m_host.CustomConfig.SetString(pkcs11_conf_slot, slot);
-            m_host.CustomConfig.SetString(pkcs11_conf_label, label);
         }
 
         public static bool ByteArrayToFile(string file, byte[] data)
@@ -195,34 +142,7 @@ namespace KeePKCS11KeyProvider
 
         private static byte[] Open(KeyProviderQueryContext ctx)
         {
-            getSettings();
 
-            if ( (pkcs11_conf_lib == null) || (pkcs11_conf_label == null) )
-            {
-                CkpPromtForm dialog = new CkpPromtForm(ctx);
-                if (UIUtil.ShowDialogAndDestroy(dialog) == DialogResult.OK)
-                {
-                    getSettings();
-                    return pkcs11.pkcs11_read_key(pkcs11_conf_lib, pkcs11_conf_label, dialog.pin.ReadString());
-                }
-            }
-            else
-            {
-
-                try
-                {
-                    CkpPromtForm dialog = new CkpPromtForm(pkcs11_conf_label);
-                    if (UIUtil.ShowDialogAndDestroy(dialog) == DialogResult.OK)
-                    {
-                         return pkcs11.pkcs11_read_key(pkcs11_conf_lib, pkcs11_conf_label, dialog.pin.ReadString());
-                    }
-                    return null;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            }
             return null;
         }
     }
