@@ -32,8 +32,10 @@ namespace KeePKCS11
 {
     public sealed class KeePKCS11Ext : Plugin
     {
+
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
+            // Дополнительно проверяем "Ссылки" на Pkcs11Interop.dll
             // Проверяем все версии Pkcs11Interop
             if (args.Name.StartsWith("Pkcs11Interop", StringComparison.OrdinalIgnoreCase) ||
                 args.Name.StartsWith("Net.Pkcs11Interop", StringComparison.OrdinalIgnoreCase))
@@ -78,6 +80,10 @@ namespace KeePKCS11
         }
     }
 
+
+    /// <summary>
+    /// Основновй класс поставщика ключей KeePKCS11
+    /// </summary>
     public sealed class KeePKCS11 : KeyProvider
     {
         public static IPluginHost m_host = null;
@@ -105,6 +111,11 @@ namespace KeePKCS11
         }
 
 
+        /// <summary>
+        /// Функция полученя ключа для новой либо существующей базы данных
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         public override byte[] GetKey(KeyProviderQueryContext ctx)
         {
             try
@@ -145,7 +156,7 @@ namespace KeePKCS11
         }
 
         /// <summary>
-        /// Получить сохраненные данные о привязке ключевого объекта данных к KeePass базе данных
+        /// Получить сохраненные данные о привязке ключевого объекта данных к базе KeePass
         /// </summary>
         public static void GetSettings()
         {
@@ -182,6 +193,13 @@ namespace KeePKCS11
             m_host.CustomConfig.SetString(_keepkcs11_conf_object_label, objectLabel);
         }
 
+
+        /// <summary>
+        /// Хз, не разобрался, пусть пока останется тут
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static bool ByteArrayToFile(string file, byte[] data)
         {
             try
@@ -198,10 +216,17 @@ namespace KeePKCS11
             return false;
         }
 
+
+        /// <summary>
+        /// Открыть базу KeePass, используя поставщик KeePKCS11
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         private static byte[] Open(KeyProviderQueryContext ctx)
         {
             GetSettings();
 
+            //Если в сохраненных настройках нет данных о соотношении ключа с базой
             if ((keepkcs11_conf_lib_path == null) || (keepkcs11_conf_token_sn_id == null))
             {
                 FormCreateOrSelect dialog = new FormCreateOrSelect(m_host, Path.GetFileName(ctx.DatabasePath));
@@ -215,6 +240,7 @@ namespace KeePKCS11
                     return dialog.keyByteArray;
                 }
             }
+            // иначе пытаемся открыть базу, используя ключ, который указан в сохраненных настройках
             else
             {
                 try

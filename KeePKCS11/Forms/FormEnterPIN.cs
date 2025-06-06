@@ -15,10 +15,12 @@ namespace KeePKCS11.Forms
         private void btnOk_Click(object sender, EventArgs e)
         {
             enteredPIN = tbxPinCode.Text;
+            // return DialogResult.OK
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // return DialogResult.Cancel
             Close();
         }
 

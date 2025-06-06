@@ -47,25 +47,28 @@
             this.btnReadTokenData = new System.Windows.Forms.Button();
             this.btnCreateKey = new System.Windows.Forms.Button();
             this.btnSelectKey = new System.Windows.Forms.Button();
+            this.btnSelectLibrary = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGetLibraryInfo
             // 
+            this.btnGetLibraryInfo.Enabled = false;
             this.btnGetLibraryInfo.Location = new System.Drawing.Point(415, 32);
             this.btnGetLibraryInfo.Name = "btnGetLibraryInfo";
             this.btnGetLibraryInfo.Size = new System.Drawing.Size(116, 23);
             this.btnGetLibraryInfo.TabIndex = 0;
-            this.btnGetLibraryInfo.Text = "Get library info/slots";
+            this.btnGetLibraryInfo.Text = "Get/Update info";
             this.btnGetLibraryInfo.UseVisualStyleBackColor = true;
             this.btnGetLibraryInfo.Click += new System.EventHandler(this.btnGetLibraryInfo_Click);
             // 
             // tbxLibraryPath
             // 
-            this.tbxLibraryPath.Location = new System.Drawing.Point(127, 35);
+            this.tbxLibraryPath.Location = new System.Drawing.Point(159, 35);
             this.tbxLibraryPath.Name = "tbxLibraryPath";
-            this.tbxLibraryPath.Size = new System.Drawing.Size(282, 20);
+            this.tbxLibraryPath.Size = new System.Drawing.Size(250, 20);
             this.tbxLibraryPath.TabIndex = 0;
+            this.tbxLibraryPath.TextChanged += new System.EventHandler(this.tbxLibraryPath_TextChanged);
             // 
             // label1
             // 
@@ -223,11 +226,22 @@
             this.btnSelectKey.UseVisualStyleBackColor = true;
             this.btnSelectKey.Click += new System.EventHandler(this.btnSelectKey_Click);
             // 
+            // btnSelectLibrary
+            // 
+            this.btnSelectLibrary.Location = new System.Drawing.Point(127, 33);
+            this.btnSelectLibrary.Name = "btnSelectLibrary";
+            this.btnSelectLibrary.Size = new System.Drawing.Size(26, 23);
+            this.btnSelectLibrary.TabIndex = 16;
+            this.btnSelectLibrary.Text = "...";
+            this.btnSelectLibrary.UseVisualStyleBackColor = true;
+            this.btnSelectLibrary.Click += new System.EventHandler(this.btnSelectLibrary_Click);
+            // 
             // FormCreateOrSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 522);
+            this.Controls.Add(this.btnSelectLibrary);
             this.Controls.Add(this.btnSelectKey);
             this.Controls.Add(this.btnCreateKey);
             this.Controls.Add(this.btnReadTokenData);
@@ -274,6 +288,7 @@
         private System.Windows.Forms.ColumnHeader ObjectLabel;
         private System.Windows.Forms.Button btnCreateKey;
         private System.Windows.Forms.Button btnSelectKey;
+        private System.Windows.Forms.Button btnSelectLibrary;
     }
 }
 

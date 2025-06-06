@@ -50,81 +50,95 @@ namespace KeePKCS11.Forms
         //    GlobalWindowManager.RemoveWindow(this);
         //}
 
+
+        /// <summary>
+        /// Получение/обновление данных о библиотеке и о доступных слотах
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGetLibraryInfo_Click(object sender, EventArgs e)
         {
-            listViewTokens.Items.Clear();
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = @"C:\Windows\System32";
-            openFileDialog.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                this.tbxLibraryPath.Text = openFileDialog.FileName;
-
-            factories = new Pkcs11InteropFactories();
-
-            IPkcs11Library pkcs11Library = factories.Pkcs11LibraryFactory.LoadPkcs11Library(factories, tbxLibraryPath.Text, AppType.MultiThreaded);
-
-            ILibraryInfo libraryInfo = pkcs11Library.GetInfo();
-
-            lblCryptokiVersion.Text = "pkcs#11 version: " + libraryInfo.CryptokiVersion;
-            lblLibraryManufacturer.Text = "Manufacturer: " + libraryInfo.ManufacturerId;
-            lblLibraryVersion.Text = "Library version: " + libraryInfo.LibraryVersion;
-
-
-            slots = pkcs11Library.GetSlotList(SlotsType.WithTokenPresent);
-
-            foreach (ISlot slot in slots)
+            try
             {
-                var slotInfo = slot.GetSlotInfo();
-                var token = slot.GetTokenInfo();
-                listViewTokens.Items.Add(new ListViewItem(new[] { Convert.ToString(slotInfo.SlotId), token.SerialNumber, token.Model, token.Label }));
+                listViewTokens.Items.Clear();
+                factories = new Pkcs11InteropFactories();
+
+                IPkcs11Library pkcs11Library = factories.Pkcs11LibraryFactory.LoadPkcs11Library(factories, tbxLibraryPath.Text, AppType.MultiThreaded);
+
+                ILibraryInfo libraryInfo = pkcs11Library.GetInfo();
+
+                lblCryptokiVersion.Text = "pkcs#11 version: " + libraryInfo.CryptokiVersion;
+                lblLibraryManufacturer.Text = "Manufacturer: " + libraryInfo.ManufacturerId;
+                lblLibraryVersion.Text = "Library version: " + libraryInfo.LibraryVersion;
+
+                slots = pkcs11Library.GetSlotList(SlotsType.WithTokenPresent);
+
+                foreach (ISlot slot in slots)
+                {
+                    var slotInfo = slot.GetSlotInfo();
+                    var token = slot.GetTokenInfo();
+                    listViewTokens.Items.Add(new ListViewItem(new[] { Convert.ToString(slotInfo.SlotId), token.SerialNumber, token.Model, token.Label }));
+                }
+                btnReadTokenData.Enabled = true;
             }
-            btnReadTokenData.Enabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
         }
   
 
         /// <summary>
-        /// Нажатие кнопки для чтения данных с токена
+        /// Чтение данных с выбранного токена
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnReadTokenData_Click(object sender, EventArgs e)
         {
-            if (listViewTokens.SelectedItems == null)
+            try
             {
-                MessageBox.Show("No slot is selected");
-                return;
-            }
-            //Вызываем диалоговое окно, для ввода пин кода для выбранного слота
-
-            string tokenPin = null;
-            using (FormEnterPIN formEnterPIN = new FormEnterPIN())
-            {
-                if (UIUtil.ShowDialogAndDestroy(formEnterPIN) == DialogResult.OK)
+                if (listViewTokens.SelectedItems == null)
                 {
-                    tokenPin = formEnterPIN.enteredPIN;
-                }
-                else
-                {
-                    MessageBox.Show("PIN code entry cancelled");
+                    MessageBox.Show("No slot is selected");
                     return;
                 }
+                //Вызываем диалоговое окно, для ввода пин кода для выбранного слота
+
+                string tokenPin = null;
+                using (FormEnterPIN formEnterPIN = new FormEnterPIN())
+                {
+                    if (UIUtil.ShowDialogAndDestroy(formEnterPIN) == DialogResult.OK)
+                    {
+                        tokenPin = formEnterPIN.enteredPIN;
+                    }
+                    else
+                    {
+                        MessageBox.Show("PIN code entry cancelled");
+                        return;
+                    }
+                }
+
+                listViewDataObjects.Items.Clear();
+                //создаем объект ISlot, где SlotId совпадает с выбранным
+
+                int intSlotID = Convert.ToInt32(this.listViewTokens.SelectedItems[0].SubItems[0].Text);
+                ulong ulongSlotID = (ulong)intSlotID;
+                selectedSlot = slots.FirstOrDefault(x => x.SlotId == ulongSlotID);
+
+                List<string> dataObjects = FindAllObjects(tokenPin);
+
+                foreach (var dataObject in dataObjects)
+                {
+                    listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                }
             }
-
-            listViewDataObjects.Items.Clear();
-            //создаем объект ISlot, где SlotId совпадает с выбранным
-
-            int intSlotID = Convert.ToInt32(this.listViewTokens.SelectedItems[0].SubItems[0].Text);
-            ulong ulongSlotID = (ulong)intSlotID;
-            selectedSlot = slots.FirstOrDefault(x => x.SlotId == ulongSlotID);
-
-            List<string> dataObjects = FindAllObjects(tokenPin);
-
-            foreach (var dataObject in dataObjects)
+            catch (Exception ex)
             {
-                listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                MessageBox.Show(ex.Message);
+                throw;
             }
-
-
         }
 
 
@@ -135,155 +149,189 @@ namespace KeePKCS11.Forms
         /// <returns>Список имен объектов</returns>
         List<string> FindAllObjects(string _userPIN)
         {
-            List<string> objectsLabels = new List<string>();
-            using (ISession session = selectedSlot.OpenSession(SessionType.ReadOnly))
+            try
             {
-                // Login as normal user
-                session.Login(CKU.CKU_USER, _userPIN);
-
-                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
-                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
-
-                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (var foundObject in foundObjects)
+                List<string> objectsLabels = new List<string>();
+                using (ISession session = selectedSlot.OpenSession(SessionType.ReadOnly))
                 {
-                    List<ulong> attributes = new List<ulong>();
-                    attributes.Add((ulong)CKA.CKA_LABEL);
-                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
-                    objectsLabels.Add(requiredAttributes[0].GetValueAsString());
+                    // Login as normal user
+                    session.Login(CKU.CKU_USER, _userPIN);
+
+                    List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                    searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
+
+                    List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                    foreach (var foundObject in foundObjects)
+                    {
+                        List<ulong> attributes = new List<ulong>();
+                        attributes.Add((ulong)CKA.CKA_LABEL);
+                        List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                        objectsLabels.Add(requiredAttributes[0].GetValueAsString());
+                    }
+                    session.Logout();
                 }
-                session.Logout();
+                return objectsLabels;
             }
-            return objectsLabels;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
         }
 
         private void btnCreateKey_Click(object sender, EventArgs e)
         {
-            string tokenPin = null;
-            string objectLabel = null;
-
-            FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
-            if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+            try
             {
-                tokenPin = formEnterLabelAndPIN.enteredPIN;
-                objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+                string tokenPin = null;
+                string objectLabel = null;
+
+                FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
+                if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+                {
+                    tokenPin = formEnterLabelAndPIN.enteredPIN;
+                    objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+                }
+                else
+                {
+                    MessageBox.Show("PIN code entry cancelled");
+                    return;
+                }
+                CreateObject(objectLabel, tokenPin);
+                listViewDataObjects.Items.Clear();
+                List<string> dataObjects = FindAllObjects(tokenPin);
+                foreach (var dataObject in dataObjects)
+                {
+                    listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("PIN code entry cancelled");
-                return;
+                MessageBox.Show(ex.Message);
+                throw;
             }
-            CreateObject(objectLabel, tokenPin);
-
-
-            listViewDataObjects.Items.Clear();
-            List<string> dataObjects = FindAllObjects(tokenPin);
-            foreach (var dataObject in dataObjects)
-            {
-                listViewDataObjects.Items.Add(new ListViewItem(dataObject));
-            }
-
-
+            
         }
 
         /// <summary>
-        /// Кнопка выбора объета данных
+        /// Получение значения CKO_DATA объекта данных
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSelectKey_Click(object sender, EventArgs e)
         {
-            string tokenPin = null;
-            FormEnterPIN formEnterPIN = new FormEnterPIN();
-            if (formEnterPIN.ShowDialog() == DialogResult.OK)
+            try
             {
-                tokenPin = formEnterPIN.enteredPIN;
+                string tokenPin = null;
+                FormEnterPIN formEnterPIN = new FormEnterPIN();
+                if (formEnterPIN.ShowDialog() == DialogResult.OK)
+                {
+                    tokenPin = formEnterPIN.enteredPIN;
+                }
+                else
+                {
+                    MessageBox.Show("PIN code entry cancelled");
+                    return;
+                }
+                string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
+                KeePKCS11.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
+                keyByteArray = Encoding.ASCII.GetBytes(keyValue);
+                // return DialogResult.OK
+                Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("PIN code entry cancelled");
-                return;
+                MessageBox.Show(ex.Message);
+                throw;
             }
-            string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
-            KeePKCS11.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
-            keyByteArray = Encoding.ASCII.GetBytes(keyValue);
-            Close();
+            
         }
 
-
-
         /// <summary>
-        /// Ищет объекты в выбраном токене по имени
+        /// Ищет объекты CKO_DATA в выбраном токене по имени
         /// </summary>
         /// <param name="_findingObjectName">Название искомого объекта данных</param>
         /// <param name="_userPIN">PIN-код от пользователя</param>
         /// <returns></returns>
         string FindKeyObject(string _findingObjectName, string _userPIN)
         {
-            // не ругается (ОК)
-            string _keyValue = null;
-            using (ISession session = selectedSlot.OpenSession(SessionType.ReadOnly))
+            try
             {
-                // Login as normal user
-                session.Login(CKU.CKU_USER, _userPIN);
-
-                List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
-                searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
-
-                List<ulong> attributes = new List<ulong>();
-                attributes.Add((ulong)CKA.CKA_LABEL);
-                attributes.Add((ulong)CKA.CKA_VALUE);
-
-                List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
-                foreach (var foundObject in foundObjects)
+                string _keyValue = null;
+                using (ISession session = selectedSlot.OpenSession(SessionType.ReadOnly))
                 {
-                    List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
-                    if (requiredAttributes[0].GetValueAsString() == _findingObjectName.Trim())
+                    // Login as normal user
+                    session.Login(CKU.CKU_USER, _userPIN);
+
+                    List<IObjectAttribute> searchTemplate = new List<IObjectAttribute>();
+                    searchTemplate.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
+
+                    List<ulong> attributes = new List<ulong>();
+                    attributes.Add((ulong)CKA.CKA_LABEL);
+                    attributes.Add((ulong)CKA.CKA_VALUE);
+
+                    List<IObjectHandle> foundObjects = session.FindAllObjects(searchTemplate);
+                    foreach (var foundObject in foundObjects)
                     {
-                        _keyValue = Encoding.UTF8.GetString(requiredAttributes[1].GetValueAsByteArray());
+                        List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
+                        if (requiredAttributes[0].GetValueAsString() == _findingObjectName.Trim())
+                        {
+                            _keyValue = Encoding.UTF8.GetString(requiredAttributes[1].GetValueAsByteArray());
+                        }
                     }
+                    session.Logout();
                 }
-                session.Logout();
+                return _keyValue;
             }
-            return _keyValue;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
         }
 
-
-
         /// <summary>
-        /// Создает объект данных вы выбранном слоте (токене)
+        /// Создает объект CKO_DATA в выбранном слоте (токене)
         /// </summary>
         /// <param name="_objectNameToCreate">Имя создаваемого объекта</param>
         /// <param name="_userPIN">PIN-код от пользователя</param>
         void CreateObject(string _objectNameToCreate, string _userPIN)
         {
-            //не ругается (ОК)
-            // Open RW session
-            using (ISession session = selectedSlot.OpenSession(SessionType.ReadWrite))
+            try
             {
-                string keyValue = GeneratingRandomPassword();
-                // Login as normal user
-                session.Login(CKU.CKU_USER, _userPIN);
+                // Open RW session
+                using (ISession session = selectedSlot.OpenSession(SessionType.ReadWrite))
+                {
+                    string keyValue = GeneratingRandomPassword();
+                    // Login as normal user
+                    session.Login(CKU.CKU_USER, _userPIN);
 
-                // Prepare attribute template of new data object
-                List<IObjectAttribute> objectAttributes = new List<IObjectAttribute>();
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_TOKEN, true));
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_MODIFIABLE, false));
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_LABEL, _objectNameToCreate));
-                objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, keyValue));
+                    // Prepare attribute template of new data object
+                    List<IObjectAttribute> objectAttributes = new List<IObjectAttribute>();
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_CLASS, CKO.CKO_DATA));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_TOKEN, true));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_MODIFIABLE, false));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_LABEL, _objectNameToCreate));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, keyValue));
 
-                // Create object
-                IObjectHandle objectHandle = session.CreateObject(objectAttributes);
+                    // Create object
+                    IObjectHandle objectHandle = session.CreateObject(objectAttributes);
 
-                // Do something interesting with new object
+                    // Do something interesting with new object
 
-                session.Logout();
+                    session.Logout();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
         }
-
-
 
         /// <summary>
         /// Генератор случайного пароля
@@ -291,7 +339,6 @@ namespace KeePKCS11.Forms
         /// <returns>256 битовое случайное значение пароля(Энтропия: ~190.5 бит)</returns>
         string GeneratingRandomPassword()
         {
-            // не ругается (ОК)
             Random rand = new Random();
             int symbolType;
             char[] charArray = new char[32];
@@ -315,6 +362,46 @@ namespace KeePKCS11.Forms
                 }
             }
             return new string(charArray).Trim();
+        }
+
+        /// <summary>
+        /// Диалог выбора библиотеки pkcs11
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSelectLibrary_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = @"C:\Windows\System32";
+                openFileDialog.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    this.tbxLibraryPath.Text = openFileDialog.FileName;
+                btnGetLibraryInfo.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Просто защита от дурака
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbxLibraryPath_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(tbxLibraryPath.Text))
+            {
+                btnGetLibraryInfo.Enabled = false;
+            }
+            else
+            {
+                btnGetLibraryInfo.Enabled = true;
+            }
         }
     }
 }

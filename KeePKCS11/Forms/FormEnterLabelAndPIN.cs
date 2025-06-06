@@ -66,6 +66,8 @@ namespace KeePKCS11.Forms
             }
 
             enteredPIN = tbxPinCode.Text;
+
+            // return DialogResult.OK
             Close();
         }
 
@@ -83,6 +85,7 @@ namespace KeePKCS11.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // return DialogResult.Cancel
             Close();
         }
 
