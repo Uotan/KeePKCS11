@@ -52,6 +52,11 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@Z5LurevgYcHy7B+9x8scYa76DlG19qrzgSgRa4gfBOM=@2.58.0.0@1</Item>
+			<Item>@5oZU7WRN4edwVxgD8DIJJpiHwjBqXC2mnD/IeOeSoEA=@2.58.0.0@1</Item>
+			<Item>@kumcvsRACCMT4hIPOWx4o5dWFVJjaRxnVKtfozL1Jvg=@2.58.0.0@1</Item>
+			<Item>@h4G1IejZKgNXMS9EULmt1OcN2AlHlICLm1+Kzox57Bg=@2.58.0.0@1</Item>
+			<Item>@sBLKgETJ2FOxsdXoWE6S+7C9FJV/i6jARf/ImHObS94=@2.58.0.0@1</Item>
 			<Item>@cIRyNmmO1l1HVxT77g2wet9w1+CjjkFYcRylYnBS2CU=@2.58.0.0@1</Item>
 			<Item>@hxF+O8WFnx97iGlptyzpohicesURWCtYCr/yfa2Kz9o=@2.58.0.0@1</Item>
 			<Item>@yrOwGf+l2JVRQ+9bYeSsEZ7guMm2quWPrv0cyqOLyqU=@2.58.0.0@1</Item>
@@ -264,7 +269,7 @@
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_object_label</Key>
-			<Value>key_1</Value>
+			<Value>key</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_lib_path</Key>

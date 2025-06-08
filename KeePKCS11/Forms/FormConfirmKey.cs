@@ -162,5 +162,10 @@ namespace KeePKCS11.Forms
             // return DialogResult.OK
             Close();
         }
+
+        private void FormConfirmKey_Load(object sender, EventArgs e)
+        {
+            lblTokeSerialNumber.Text = "Token S/N: " + tokenSN;
+        }
     }
 }
