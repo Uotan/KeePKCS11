@@ -9,13 +9,18 @@
 	</Meta>
 	<Application>
 		<LastUsedFile>
-			<Path>Test base\Database.kdbx</Path>
+			<Path>Test base\Database_2.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
 			<CredSaveMode>NoSave</CredSaveMode>
 		</LastUsedFile>
 		<MostRecentlyUsed>
 			<MaxItemCount>12</MaxItemCount>
 			<Items>
+				<ConnectionInfo>
+					<Path>Test base\Database_2.kdbx</Path>
+					<CredProtMode>Obf</CredProtMode>
+					<CredSaveMode>NoSave</CredSaveMode>
+				</ConnectionInfo>
 				<ConnectionInfo>
 					<Path>Test base\Database.kdbx</Path>
 					<CredProtMode>Obf</CredProtMode>
@@ -52,6 +57,8 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@9nxDGc+NvWGAl7lMa2so23TidKXFYcyF62O89H09f3o=@2.58.0.0@1</Item>
+			<Item>@cHBPO9hn/od2Q1PC/NjtfVwTM4ZAi0XT7rr8JUtqIB8=@2.58.0.0@1</Item>
 			<Item>@Z5LurevgYcHy7B+9x8scYa76DlG19qrzgSgRa4gfBOM=@2.58.0.0@1</Item>
 			<Item>@5oZU7WRN4edwVxgD8DIJJpiHwjBqXC2mnD/IeOeSoEA=@2.58.0.0@1</Item>
 			<Item>@kumcvsRACCMT4hIPOWx4o5dWFVJjaRxnVKtfozL1Jvg=@2.58.0.0@1</Item>
@@ -222,6 +229,10 @@
 				<DatabasePath>Test base\Database33333.kdbx</DatabasePath>
 				<KeyProvider>KeePKCS11</KeyProvider>
 			</Association>
+			<Association>
+				<DatabasePath>Test base\Database_2.kdbx</DatabasePath>
+				<KeyProvider>KeePKCS11</KeyProvider>
+			</Association>
 		</KeySources>
 		<Duplication />
 		<Print>
@@ -265,11 +276,11 @@
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_token_sn_id</Key>
-			<Value>3e494599</Value>
+			<Value>3b7d7ae5</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_object_label</Key>
-			<Value>key</Value>
+			<Value>key_01</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_lib_path</Key>
@@ -282,6 +293,18 @@
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_object_label</Key>
 			<Value>My key 2025</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database_2.kdbx.keepkcs11_lib_path</Key>
+			<Value>C:\Windows\System32\rtPKCS11ECP.dll</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database_2.kdbx.keepkcs11_token_sn_id</Key>
+			<Value>3e8f4bca</Value>
+		</Item>
+		<Item>
+			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database_2.kdbx.keepkcs11_object_label</Key>
+			<Value>my_key</Value>
 		</Item>
 	</Custom>
 </Configuration>

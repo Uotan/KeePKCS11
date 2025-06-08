@@ -304,7 +304,7 @@ namespace KeePKCS11.Forms
                 // Open RW session
                 using (ISession session = selectedSlot.OpenSession(SessionType.ReadWrite))
                 {
-                    string keyValue = GeneratingRandomPassword();
+                    string keyValue = GenerateRandomPassword();
                     // Login as normal user
                     session.Login(CKU.CKU_USER, _userPIN);
 
@@ -336,9 +336,10 @@ namespace KeePKCS11.Forms
         /// <summary>
         /// Генератор случайного пароля
         /// </summary>
-        /// <returns>256 битовое случайное значение пароля(Энтропия: ~190.5 бит)</returns>
-        string GeneratingRandomPassword()
+        /// <returns>256 битовое случайное значение пароля(Энтропия: ≈135.71 бит)</returns>
+        string GenerateRandomPassword()
         {
+            // Использовать Random() не безопасно, в следующей версии буду использовать встроенный генератор паролей KeePass
             Random rand = new Random();
             int symbolType;
             char[] charArray = new char[32];
