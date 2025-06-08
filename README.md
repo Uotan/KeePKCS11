@@ -2,38 +2,40 @@
 
 KeePKCS11 это простой плагин для оригинального [KeePass](https://keepass.info/), добавляющий ключевой поставщик, взаимодействующий с pkcs#11 библиотекой для ваших криптографический токенов.
 
-Плагин **НЕ** реализует ассиметричное шифрование или любое другое взаимодействие с сертификатами. Вместо этого он создает/читает объекты данных, которые KeePass испольует для симетричного шифрования встроеными алгоритмыми AES и ChaCha20.
+Плагин **НЕ** реализует ассиметричное шифрование или любое другое взаимодействие с сертификатами. Вместо этого он создает/читает объекты данных (CKO_DATA), которые KeePass испольует для симетричного шифрования.
 
 Плагин использует C# библиотеку [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop). Вы так же можете вручную создавать объекты и делать их резервную копию, используя [Pkcs11Admin](https://github.com/Pkcs11Admin/Pkcs11Admin).
 
+Свойства ключевого объекта:
+ - CKA_CLASS: 		CKO_DATA
+ - CKA_TOKEN: 		True
+ - CKA_PRIVATE:		True 
+ - CKA_MODIFIABLE:	False
+ - CKA_LABEL:		**Custom**
+ - CKA_VALUE:		**Custom byte array**
 
-# Сборка
+
+## Сборка
 
 Официальная [инструкция по созданию плагинов](https://keepass.info/help/v2_dev/plg_index.html) гласит:
 
-Выполнять команду в "cmd.exe"
+Выполнять команду в "cmd.exe" (пути условны)
 
-`D:\keepass\KeePass.exe --plgx-create D:\repos\KeePKCS11`
+`C:\keepass\KeePass.exe --plgx-create C:\repos\KeePKCS11\KeePKCS11`
 
-В каталоге "KeePKCS11" должен находиться "KeePKCS11.csproj", иначе компилятор KeePass выдаст ошибку
+В конечном каталог "KeePKCS11" должен находиться "KeePKCS11.csproj", иначе компилятор KeePass выдаст ошибку
 
 Будет создан файл "D:\repos\KeePKCS11.plgx"
 
 И всё... Открывать проект, достраивать зависимости к пространству имен KeePass НЕ ОБЯЗАТЕЛЬНО.
-Компилировать проект средствами Visual Studio НЕ НУЖНО, каталоги ".\KeePKCS11\bin\Debug" и ".\KeePKCS11\bin\Release" должны быть пустыми 
+Компилировать проект средствами Visual Studio НЕ НУЖНО, каталоги ".\KeePKCS11\bin\Debug" и ".\KeePKCS11\bin\Release" должны быть пустыми!
 
-# Совместимость
+## Совместимость
+### Платформа
 
-## Платформа
-Плагин работает только в среде Windows. Да - вы сможете добавить его в linux, при использовании Portable версии KeePass через [mono](https://keepass.info/help/v2/setup.html#mono) и его графический интерфейс будет открываться, но библиотека [Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop) работает с Linux библиотеками формата ".so" начиная с версии .NET 5 (не путать с .Net Framework или C# 5).
+На текущий момент плагин работает только в среде Windows. Работа в среде linux из под Mono возможно появится, но не гарантируется.
 
-https://dotnet.microsoft.com/ru-ru/download
-
-https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
-
-Я уже компилировал тестовые консольные приложения, используя .Net Framework 4.7.2 и запуская его через mono в среде Linux, и нативно компилировал аналогичный код на .NET 5, запуская его через [.NET Runtime for Linux](https://dotnet.microsoft.com/ru-ru/download/dotnet/thank-you/runtime-aspnetcore-5.0.17-linux-x64-binaries). Это работает только с новыми версиями .NET. Можете почитать пример использования [тут](https://github.com/Pkcs11Interop/Pkcs11Interop/blob/master/doc/06_GETTING_STARTED.md).
-
-## pkcs#11 токены
+### PKCS#11 токены
 
 [PASS] - плагин полностью совместим с этим устройством.
 
@@ -61,5 +63,5 @@ https://dotnet.microsoft.com/ru-ru/download/visual-studio-sdks?cid=getdotnetsdk
 * SafeNet eToken 5110 [MOST LIKELY]
 * eToken PRO (Java) [MOST LIKELY]
 
+Постепенно в списке будут появляться другие другие устройста.
 
-Постепенно буду добавлять другие устройста в этот список.
