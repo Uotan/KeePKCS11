@@ -9,7 +9,7 @@
 	</Meta>
 	<Application>
 		<LastUsedFile>
-			<Path>Test base\Database_2.kdbx</Path>
+			<Path>Test base\Database.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
 			<CredSaveMode>NoSave</CredSaveMode>
 		</LastUsedFile>
@@ -17,12 +17,12 @@
 			<MaxItemCount>12</MaxItemCount>
 			<Items>
 				<ConnectionInfo>
-					<Path>Test base\Database_2.kdbx</Path>
+					<Path>Test base\Database.kdbx</Path>
 					<CredProtMode>Obf</CredProtMode>
 					<CredSaveMode>NoSave</CredSaveMode>
 				</ConnectionInfo>
 				<ConnectionInfo>
-					<Path>Test base\Database.kdbx</Path>
+					<Path>Test base\Database_2.kdbx</Path>
 					<CredProtMode>Obf</CredProtMode>
 					<CredSaveMode>NoSave</CredSaveMode>
 				</ConnectionInfo>
@@ -57,6 +57,7 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@99HtpQ3P+3afFhGSDxBO0warTT+36lqzQ23TFOow/e4=@2.58.0.0@1</Item>
 			<Item>@9nxDGc+NvWGAl7lMa2so23TidKXFYcyF62O89H09f3o=@2.58.0.0@1</Item>
 			<Item>@cHBPO9hn/od2Q1PC/NjtfVwTM4ZAi0XT7rr8JUtqIB8=@2.58.0.0@1</Item>
 			<Item>@Z5LurevgYcHy7B+9x8scYa76DlG19qrzgSgRa4gfBOM=@2.58.0.0@1</Item>
@@ -276,11 +277,11 @@
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_token_sn_id</Key>
-			<Value>3b7d7ae5</Value>
+			<Value>3e494599</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_object_label</Key>
-			<Value>key_01</Value>
+			<Value>key</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_lib_path</Key>
