@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnGetLibraryInfo = new System.Windows.Forms.Button();
             this.tbxLibraryPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,15 +49,21 @@
             this.btnCreateKey = new System.Windows.Forms.Button();
             this.btnSelectKey = new System.Windows.Forms.Button();
             this.btnSelectLibrary = new System.Windows.Forms.Button();
+            this.contextMenuStripPassGen = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openPassGenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.generateUsingProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStripPassGen.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGetLibraryInfo
             // 
             this.btnGetLibraryInfo.Enabled = false;
-            this.btnGetLibraryInfo.Location = new System.Drawing.Point(415, 32);
+            this.btnGetLibraryInfo.Location = new System.Drawing.Point(553, 39);
+            this.btnGetLibraryInfo.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetLibraryInfo.Name = "btnGetLibraryInfo";
-            this.btnGetLibraryInfo.Size = new System.Drawing.Size(116, 23);
+            this.btnGetLibraryInfo.Size = new System.Drawing.Size(155, 28);
             this.btnGetLibraryInfo.TabIndex = 0;
             this.btnGetLibraryInfo.Text = "Get/Update info";
             this.btnGetLibraryInfo.UseVisualStyleBackColor = true;
@@ -64,54 +71,60 @@
             // 
             // tbxLibraryPath
             // 
-            this.tbxLibraryPath.Location = new System.Drawing.Point(159, 35);
+            this.tbxLibraryPath.Location = new System.Drawing.Point(212, 43);
+            this.tbxLibraryPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbxLibraryPath.Name = "tbxLibraryPath";
-            this.tbxLibraryPath.Size = new System.Drawing.Size(250, 20);
+            this.tbxLibraryPath.Size = new System.Drawing.Size(332, 22);
             this.tbxLibraryPath.TabIndex = 0;
             this.tbxLibraryPath.TextChanged += new System.EventHandler(this.tbxLibraryPath_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(124, 12);
+            this.label1.Location = new System.Drawing.Point(165, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 13);
+            this.label1.Size = new System.Drawing.Size(205, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Set the path to the pkcs#11 library";
             // 
             // lblLibraryManufacturer
             // 
             this.lblLibraryManufacturer.AutoSize = true;
-            this.lblLibraryManufacturer.Location = new System.Drawing.Point(124, 63);
+            this.lblLibraryManufacturer.Location = new System.Drawing.Point(165, 78);
+            this.lblLibraryManufacturer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLibraryManufacturer.Name = "lblLibraryManufacturer";
-            this.lblLibraryManufacturer.Size = new System.Drawing.Size(73, 13);
+            this.lblLibraryManufacturer.Size = new System.Drawing.Size(87, 16);
             this.lblLibraryManufacturer.TabIndex = 3;
             this.lblLibraryManufacturer.Text = "Manufacturer:";
             // 
             // lblLibraryVersion
             // 
             this.lblLibraryVersion.AutoSize = true;
-            this.lblLibraryVersion.Location = new System.Drawing.Point(124, 86);
+            this.lblLibraryVersion.Location = new System.Drawing.Point(165, 106);
+            this.lblLibraryVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLibraryVersion.Name = "lblLibraryVersion";
-            this.lblLibraryVersion.Size = new System.Drawing.Size(83, 13);
+            this.lblLibraryVersion.Size = new System.Drawing.Size(105, 16);
             this.lblLibraryVersion.TabIndex = 4;
             this.lblLibraryVersion.Text = "Library versions:";
             // 
             // lblCryptokiVersion
             // 
             this.lblCryptokiVersion.AutoSize = true;
-            this.lblCryptokiVersion.Location = new System.Drawing.Point(124, 110);
+            this.lblCryptokiVersion.Location = new System.Drawing.Point(165, 135);
+            this.lblCryptokiVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCryptokiVersion.Name = "lblCryptokiVersion";
-            this.lblCryptokiVersion.Size = new System.Drawing.Size(94, 13);
+            this.lblCryptokiVersion.Size = new System.Drawing.Size(113, 16);
             this.lblCryptokiVersion.TabIndex = 5;
             this.lblCryptokiVersion.Text = "PKCS#11 version:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::KeePKCS11.Properties.Resources.pkcs11_token;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(106, 118);
+            this.pictureBox1.Size = new System.Drawing.Size(141, 145);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -119,18 +132,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 137);
+            this.label2.Location = new System.Drawing.Point(15, 169);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Slots:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 325);
+            this.label3.Location = new System.Drawing.Point(16, 400);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 13);
+            this.label3.Size = new System.Drawing.Size(143, 16);
             this.label3.TabIndex = 11;
             this.label3.Text = "Data objects (key files)";
             // 
@@ -145,10 +160,11 @@
             this.listViewTokens.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewTokens.HideSelection = false;
             this.listViewTokens.LabelWrap = false;
-            this.listViewTokens.Location = new System.Drawing.Point(12, 153);
+            this.listViewTokens.Location = new System.Drawing.Point(16, 188);
+            this.listViewTokens.Margin = new System.Windows.Forms.Padding(4);
             this.listViewTokens.MultiSelect = false;
             this.listViewTokens.Name = "listViewTokens";
-            this.listViewTokens.Size = new System.Drawing.Size(518, 144);
+            this.listViewTokens.Size = new System.Drawing.Size(689, 176);
             this.listViewTokens.TabIndex = 8;
             this.listViewTokens.UseCompatibleStateImageBehavior = false;
             this.listViewTokens.View = System.Windows.Forms.View.Details;
@@ -181,10 +197,11 @@
             this.listViewDataObjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewDataObjects.HideSelection = false;
             this.listViewDataObjects.LabelWrap = false;
-            this.listViewDataObjects.Location = new System.Drawing.Point(12, 341);
+            this.listViewDataObjects.Location = new System.Drawing.Point(16, 420);
+            this.listViewDataObjects.Margin = new System.Windows.Forms.Padding(4);
             this.listViewDataObjects.MultiSelect = false;
             this.listViewDataObjects.Name = "listViewDataObjects";
-            this.listViewDataObjects.Size = new System.Drawing.Size(518, 144);
+            this.listViewDataObjects.Size = new System.Drawing.Size(689, 176);
             this.listViewDataObjects.TabIndex = 12;
             this.listViewDataObjects.UseCompatibleStateImageBehavior = false;
             this.listViewDataObjects.View = System.Windows.Forms.View.Details;
@@ -197,9 +214,10 @@
             // btnReadTokenData
             // 
             this.btnReadTokenData.Enabled = false;
-            this.btnReadTokenData.Location = new System.Drawing.Point(414, 303);
+            this.btnReadTokenData.Location = new System.Drawing.Point(552, 373);
+            this.btnReadTokenData.Margin = new System.Windows.Forms.Padding(4);
             this.btnReadTokenData.Name = "btnReadTokenData";
-            this.btnReadTokenData.Size = new System.Drawing.Size(116, 23);
+            this.btnReadTokenData.Size = new System.Drawing.Size(155, 28);
             this.btnReadTokenData.TabIndex = 13;
             this.btnReadTokenData.Text = "Read keyfiles";
             this.btnReadTokenData.UseVisualStyleBackColor = true;
@@ -207,9 +225,10 @@
             // 
             // btnCreateKey
             // 
-            this.btnCreateKey.Location = new System.Drawing.Point(12, 491);
+            this.btnCreateKey.Location = new System.Drawing.Point(16, 604);
+            this.btnCreateKey.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateKey.Name = "btnCreateKey";
-            this.btnCreateKey.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateKey.Size = new System.Drawing.Size(100, 28);
             this.btnCreateKey.TabIndex = 14;
             this.btnCreateKey.Text = "Create key";
             this.btnCreateKey.UseVisualStyleBackColor = true;
@@ -218,9 +237,10 @@
             // btnSelectKey
             // 
             this.btnSelectKey.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSelectKey.Location = new System.Drawing.Point(415, 491);
+            this.btnSelectKey.Location = new System.Drawing.Point(553, 604);
+            this.btnSelectKey.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectKey.Name = "btnSelectKey";
-            this.btnSelectKey.Size = new System.Drawing.Size(115, 23);
+            this.btnSelectKey.Size = new System.Drawing.Size(153, 28);
             this.btnSelectKey.TabIndex = 15;
             this.btnSelectKey.Text = "Select key";
             this.btnSelectKey.UseVisualStyleBackColor = true;
@@ -228,19 +248,48 @@
             // 
             // btnSelectLibrary
             // 
-            this.btnSelectLibrary.Location = new System.Drawing.Point(127, 33);
+            this.btnSelectLibrary.Location = new System.Drawing.Point(169, 41);
+            this.btnSelectLibrary.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectLibrary.Name = "btnSelectLibrary";
-            this.btnSelectLibrary.Size = new System.Drawing.Size(26, 23);
+            this.btnSelectLibrary.Size = new System.Drawing.Size(35, 28);
             this.btnSelectLibrary.TabIndex = 16;
             this.btnSelectLibrary.Text = "...";
             this.btnSelectLibrary.UseVisualStyleBackColor = true;
             this.btnSelectLibrary.Click += new System.EventHandler(this.btnSelectLibrary_Click);
             // 
+            // contextMenuStripPassGen
+            // 
+            this.contextMenuStripPassGen.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripPassGen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPassGenToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.generateUsingProfileToolStripMenuItem});
+            this.contextMenuStripPassGen.Name = "contextMenuStrip1";
+            this.contextMenuStripPassGen.Size = new System.Drawing.Size(259, 86);
+            // 
+            // openPassGenToolStripMenuItem
+            // 
+            this.openPassGenToolStripMenuItem.Name = "openPassGenToolStripMenuItem";
+            this.openPassGenToolStripMenuItem.Size = new System.Drawing.Size(258, 24);
+            this.openPassGenToolStripMenuItem.Text = "&Open Password Generator...";
+            this.openPassGenToolStripMenuItem.Click += new System.EventHandler(this.openPassGenToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(255, 6);
+            // 
+            // generateUsingProfileToolStripMenuItem
+            // 
+            this.generateUsingProfileToolStripMenuItem.Name = "generateUsingProfileToolStripMenuItem";
+            this.generateUsingProfileToolStripMenuItem.Size = new System.Drawing.Size(258, 24);
+            this.generateUsingProfileToolStripMenuItem.Text = "Generate Using Profile";
+            // 
             // FormCreateOrSelect
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 522);
+            this.ClientSize = new System.Drawing.Size(723, 642);
             this.Controls.Add(this.btnSelectLibrary);
             this.Controls.Add(this.btnSelectKey);
             this.Controls.Add(this.btnCreateKey);
@@ -257,11 +306,13 @@
             this.Controls.Add(this.tbxLibraryPath);
             this.Controls.Add(this.btnGetLibraryInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormCreateOrSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "pkcs#11 test editor";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStripPassGen.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +340,10 @@
         private System.Windows.Forms.Button btnCreateKey;
         private System.Windows.Forms.Button btnSelectKey;
         private System.Windows.Forms.Button btnSelectLibrary;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripPassGen;
+        private System.Windows.Forms.ToolStripMenuItem openPassGenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem generateUsingProfileToolStripMenuItem;
     }
 }
 

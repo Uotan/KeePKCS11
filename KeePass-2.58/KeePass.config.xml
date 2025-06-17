@@ -4,8 +4,8 @@
 		<Version>2.58</Version>
 		<PreferUserConfiguration>false</PreferUserConfiguration>
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
-		<DpiFactorX>1</DpiFactorX>
-		<DpiFactorY>1</DpiFactorY>
+		<DpiFactorX>1.25</DpiFactorX>
+		<DpiFactorY>1.25</DpiFactorY>
 	</Meta>
 	<Application>
 		<LastUsedFile>
@@ -57,6 +57,18 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@jYRb22RIA7an4EvDr4rgu3DQtBan2mLOCP08R1mxXI8=@2.58.0.0@1</Item>
+			<Item>@hJZJvqFmGpJ4jExcv9nE83yIew4TuNKLOSezC4SSM90=@2.58.0.0@1</Item>
+			<Item>@+mr8dMtkz1Nm3X0H+M6VOV+0QGQBBDGQchBz1uxTTdY=@2.58.0.0@1</Item>
+			<Item>@mIjbt8q7xDxgbCC09FL01I00Xe14X/unSu3FOJk+/ws=@2.58.0.0@1</Item>
+			<Item>@CXIBKboYrv6UtlViH2izgx/Q/TiyoSEPYlC+sr38070=@2.58.0.0@1</Item>
+			<Item>@87a0Z0RtU7mSqanU/R5qQxFA2ro4by9oTqp83x3FD+Y=@2.58.0.0@1</Item>
+			<Item>@Oz1+WOjZAqCMDpBZxoNE9123Xl9NU1Ow4qicxiYI5oo=@2.58.0.0@1</Item>
+			<Item>@cZmB8D0H0RSHqcemhKZFODdU5RSICptAHLnkag8bnus=@2.58.0.0@1</Item>
+			<Item>@eKipyjoFLfFBG3qCTBGFJLkxj2jYdD9OZ7WWl0uKMfQ=@2.58.0.0@1</Item>
+			<Item>@8E8aDWun7yjaGvb89NzkPFxBgaSmXJ5gGNAEeXnWMUc=@2.58.0.0@1</Item>
+			<Item>@KtoJB1cqrdZWJHl2GCwmo2wS9Ys3ZYyR5GpUSWS9iiI=@2.58.0.0@1</Item>
+			<Item>@jI7LeRmck4MNkGiaOG2LRRP2pDy82cKuaqhSPWjqV8M=@2.58.0.0@1</Item>
 			<Item>@99HtpQ3P+3afFhGSDxBO0warTT+36lqzQ23TFOow/e4=@2.58.0.0@1</Item>
 			<Item>@9nxDGc+NvWGAl7lMa2so23TidKXFYcyF62O89H09f3o=@2.58.0.0@1</Item>
 			<Item>@cHBPO9hn/od2Q1PC/NjtfVwTM4ZAi0XT7rr8JUtqIB8=@2.58.0.0@1</Item>
@@ -109,19 +121,14 @@
 			<Item>@QA5u2adunpN1nXMxrAYvwYY8nVSxCqhbB0QitFSbb54=@2.58.0.0@1</Item>
 			<Item>@Kl9zd6dWwGI9oEUV2/z1QOXEqaQLdgq2nNpKHoN8XdA=@2.58.0.0@1</Item>
 			<Item>@UdklagZmrEj+y2cpUziQmI3l2JdkuL7vxKtZ07C82YI=@2.58.0.0@1</Item>
-			<Item>@xwRKMRE29w8BgdoN+Hxr2KY2BUpKWZRCnRChZ9YoKBQ=@2.58.0.0@1</Item>
-			<Item>@taXlM+OTW8uD38USjGZIGvxatvKWIv1dbhYnE1SXQJ4=@2.58.0.0@1</Item>
-			<Item>@wp3fGc0CK73jW21hf8JppUhEjnbQspMBs2fvYQhfbLM=@2.58.0.0@1</Item>
-			<Item>@V8mKyKSnEiWA12um+YJofPSX1T5h14bG9hrOg2vHT+o=@2.58.0.0@1</Item>
-			<Item>@LujxNibROsUlrxmFhIEdELUzfXpTJuP0pNAPJrEAkOg=@2.58.0.0@1</Item>
 		</PluginCompatibility>
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>433</X>
-		<Y>150</Y>
-		<Width>670</Width>
-		<Height>525</Height>
+		<X>541</X>
+		<Y>188</Y>
+		<Width>838</Width>
+		<Height>656</Height>
 		<Maximized>true</Maximized>
 		<SplitterHorizontalFrac>0.7241014799154335</SplitterHorizontalFrac>
 		<SplitterVerticalFrac>0.25</SplitterVerticalFrac>
@@ -131,24 +138,24 @@
 		<EntryListColumnCollection>
 			<Column>
 				<Type>Title</Type>
-				<Width>261</Width>
+				<Width>326</Width>
 			</Column>
 			<Column>
 				<Type>UserName</Type>
-				<Width>188</Width>
+				<Width>235</Width>
 			</Column>
 			<Column>
 				<Type>Password</Type>
-				<Width>90</Width>
+				<Width>112</Width>
 				<HideWithAsterisks>true</HideWithAsterisks>
 			</Column>
 			<Column>
 				<Type>Url</Type>
-				<Width>429</Width>
+				<Width>536</Width>
 			</Column>
 			<Column>
 				<Type>Notes</Type>
-				<Width>90</Width>
+				<Width>112</Width>
 			</Column>
 		</EntryListColumnCollection>
 		<EntryListColumnDisplayOrder>0 1 2 3 4</EntryListColumnDisplayOrder>

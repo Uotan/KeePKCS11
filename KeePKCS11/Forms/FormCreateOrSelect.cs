@@ -1,13 +1,21 @@
-﻿using KeePass.Plugins;
+﻿using KeePass.Forms;
+using KeePass;
+using KeePass.Plugins;
 using KeePass.UI;
+using KeePass.Util;
+using KeePassLib.Cryptography.PasswordGenerator;
+using KeePassLib.Security;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace KeePKCS11.Forms
 {
@@ -16,12 +24,13 @@ namespace KeePKCS11.Forms
         List<ISlot> slots = null;
         ISlot selectedSlot = null;
         Pkcs11InteropFactories factories;
+        private DynamicMenu m_dynGenProfiles = null;
 
         public byte[] keyByteArray { get; private set; }
 
         private IPluginHost m_host = null;
         private string database;
-        private DynamicMenu m_dynGenProfiles;
+        
         public FormCreateOrSelect()
         {
             InitializeComponent();
@@ -40,10 +49,18 @@ namespace KeePKCS11.Forms
             InitializeComponent();
         }
 
-        //private void OnFormLoad(object sender, EventArgs e)
-        //{
-        //    GlobalWindowManager.AddWindow(this);
-        //}
+        private void OnFormLoad(object sender, EventArgs e)
+        {
+            GlobalWindowManager.AddWindow(this);
+
+            
+        }
+
+        private void M_dynGenProfiles_MenuClick(object sender, DynamicMenuEventArgs e)
+        {
+            MessageBox.Show(Convert.ToString(e.ItemName));
+            throw new NotImplementedException();
+        }
 
         //private void OnFormClose(object sender, FormClosingEventArgs e)
         //{
@@ -182,36 +199,20 @@ namespace KeePKCS11.Forms
 
         private void btnCreateKey_Click(object sender, EventArgs e)
         {
-            try
+            // читаем все профили для генерации пароля
+            /*m_dynGenProfiles.Clear();
+*/
+            foreach (PwProfile pwgo in PwGeneratorUtil.GetAllProfiles(true))
             {
-                string tokenPin = null;
-                string objectLabel = null;
+                MessageBox.Show(pwgo.Name);
+                //m_dynGenProfiles.AddItem(pwgo.Name, null);
+            }
+            //m_dynGenProfiles = new DynamicMenu(generateUsingProfileToolStripMenuItem.DropDownItems);
+            //m_dynGenProfiles.MenuClick += M_dynGenProfiles_MenuClick;
 
-                FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
-                if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
-                {
-                    tokenPin = formEnterLabelAndPIN.enteredPIN;
-                    objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
-                }
-                else
-                {
-                    MessageBox.Show("PIN code entry cancelled");
-                    return;
-                }
-                CreateObject(objectLabel, tokenPin);
-                listViewDataObjects.Items.Clear();
-                List<string> dataObjects = FindAllObjects(tokenPin);
-                foreach (var dataObject in dataObjects)
-                {
-                    listViewDataObjects.Items.Add(new ListViewItem(dataObject));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-            
+            //contextMenuStripPassGen.Show(btnCreateKey, new Point(0, btnCreateKey.Height));
+            //contextMenuStripPassGen.Show();
+
         }
 
         /// <summary>
@@ -296,15 +297,19 @@ namespace KeePKCS11.Forms
         /// Создает объект CKO_DATA в выбранном слоте (токене)
         /// </summary>
         /// <param name="_objectNameToCreate">Имя создаваемого объекта</param>
-        /// <param name="_userPIN">PIN-код от пользователя</param>
-        void CreateObject(string _objectNameToCreate, string _userPIN)
+        /// <param name="_userPIN">PIN-код от пользователя</param>>
+        /// <param name="_passString">Массив байтов для создаваемого на токене ключа</param>>
+        void CreateObject(string _objectNameToCreate, string _userPIN, byte[] _passString)
         {
             try
             {
                 // Open RW session
                 using (ISession session = selectedSlot.OpenSession(SessionType.ReadWrite))
                 {
-                    string keyValue = GenerateRandomPassword();
+                    //string keyValue = GenerateRandomPassword();
+                    //string keyValue = BitConverter.ToString(_passString);
+
+
                     // Login as normal user
                     session.Login(CKU.CKU_USER, _userPIN);
 
@@ -315,7 +320,7 @@ namespace KeePKCS11.Forms
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_MODIFIABLE, false));
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_LABEL, _objectNameToCreate));
-                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, keyValue));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, _passString));
 
                     // Create object
                     IObjectHandle objectHandle = session.CreateObject(objectAttributes);
@@ -404,5 +409,55 @@ namespace KeePKCS11.Forms
                 btnGetLibraryInfo.Enabled = true;
             }
         }
+
+        private void openPassGenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    PwGeneratorForm pgf = new PwGeneratorForm();
+
+            //    if (pgf.ShowDialog() == DialogResult.OK)
+            //    {
+            //        byte[] pbEntropy = EntropyForm.CollectEntropyIfEnabled(pgf.SelectedProfile);
+            //        ProtectedString psNewPassword;
+            //        PwGenerator.Generate(out psNewPassword, pgf.SelectedProfile, pbEntropy,
+            //            Program.PwGeneratorPool);
+
+            //        byte[] pbNewPassword = psNewPassword.ReadUtf8();
+
+
+
+            //        string tokenPin = null;
+            //        string objectLabel = null;
+
+            //        FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
+            //        if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+            //        {
+            //            tokenPin = formEnterLabelAndPIN.enteredPIN;
+            //            objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("PIN code entry cancelled");
+            //            return;
+            //        }
+            //        CreateObject(objectLabel, tokenPin, pbNewPassword);
+            //        listViewDataObjects.Items.Clear();
+            //        List<string> dataObjects = FindAllObjects(tokenPin);
+            //        foreach (var dataObject in dataObjects)
+            //        {
+            //            listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+            //        }
+            //        UIUtil.DestroyForm(pgf);
+            //    }
+            //}
+
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    throw;
+            //}
+        }
+
     }
 }
