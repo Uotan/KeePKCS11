@@ -4,8 +4,8 @@
 		<Version>2.58</Version>
 		<PreferUserConfiguration>false</PreferUserConfiguration>
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
-		<DpiFactorX>1.25</DpiFactorX>
-		<DpiFactorY>1.25</DpiFactorY>
+		<DpiFactorX>1</DpiFactorX>
+		<DpiFactorY>1</DpiFactorY>
 	</Meta>
 	<Application>
 		<LastUsedFile>
@@ -57,6 +57,13 @@
 			<Triggers />
 		</TriggerSystem>
 		<PluginCompatibility>
+			<Item>@XE29xuhHK9BXkdwE5UjEAmSqpGfy2ELIvWUv3QDduGA=@2.58.0.0@1</Item>
+			<Item>@ifngz7EYgYnF5/MzTAeYUUr4jLOWQi23EzP80TBOv/g=@2.58.0.0@1</Item>
+			<Item>@a1SgE1wYgRbVAtlhgzVO2AAoh/vOe32y75IaAYh6dzM=@2.58.0.0@1</Item>
+			<Item>@j410GVW5uifGbzjGqhudPqZR8JG6WnoP03xSy4jsrkY=@2.58.0.0@1</Item>
+			<Item>@HVLdavqDiy/S0NtsHNyX7cs3K4aKp6wjhmF0jOlqBaQ=@2.58.0.0@1</Item>
+			<Item>@n1ybR4zA/BKrEEJYdFpf/eiX4FMM1hhCLBnv8o3S5i4=@2.58.0.0@1</Item>
+			<Item>@UElnVdGccS24i0q6lRg787vHKWSw4QcDqXadWnd3fzM=@2.58.0.0@1</Item>
 			<Item>@jYRb22RIA7an4EvDr4rgu3DQtBan2mLOCP08R1mxXI8=@2.58.0.0@1</Item>
 			<Item>@hJZJvqFmGpJ4jExcv9nE83yIew4TuNKLOSezC4SSM90=@2.58.0.0@1</Item>
 			<Item>@+mr8dMtkz1Nm3X0H+M6VOV+0QGQBBDGQchBz1uxTTdY=@2.58.0.0@1</Item>
@@ -114,21 +121,14 @@
 			<Item>@uLEQgKZBoHcXnr9lm53XQXL/XqNVtjYQABsmQyTEnGw=@2.58.0.0@1</Item>
 			<Item>@KaNt3oAFJEL5k/0aajuquuZAb45ezEZcgdBikQL2cXc=@2.58.0.0@1</Item>
 			<Item>@TnCgD6pGJ+NgCmEt+dRqB0iJe1svy2ufEGhCUR8MTVA=@2.58.0.0@1</Item>
-			<Item>@txha2TmnH4zM5K9YWLRrwSa8PySSRO27Efe4G/bjXJU=@2.58.0.0@1</Item>
-			<Item>@0GVbagLofDhgMTY+XousSVVkV8FGkVlS3e8FU4CIxQY=@2.58.0.0@1</Item>
-			<Item>@klXkDTvjXF3u23s+i/R2aiEQjxNf4fi8kxHFyYTUZEI=@2.58.0.0@1</Item>
-			<Item>@3sIEO8/ZaqOQfFKMGrRSx4wtwSqgYrcsxPL7Dn54KBc=@2.58.0.0@1</Item>
-			<Item>@QA5u2adunpN1nXMxrAYvwYY8nVSxCqhbB0QitFSbb54=@2.58.0.0@1</Item>
-			<Item>@Kl9zd6dWwGI9oEUV2/z1QOXEqaQLdgq2nNpKHoN8XdA=@2.58.0.0@1</Item>
-			<Item>@UdklagZmrEj+y2cpUziQmI3l2JdkuL7vxKtZ07C82YI=@2.58.0.0@1</Item>
 		</PluginCompatibility>
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>541</X>
-		<Y>188</Y>
-		<Width>838</Width>
-		<Height>656</Height>
+		<X>433</X>
+		<Y>150</Y>
+		<Width>670</Width>
+		<Height>525</Height>
 		<Maximized>true</Maximized>
 		<SplitterHorizontalFrac>0.7241014799154335</SplitterHorizontalFrac>
 		<SplitterVerticalFrac>0.25</SplitterVerticalFrac>
@@ -138,24 +138,24 @@
 		<EntryListColumnCollection>
 			<Column>
 				<Type>Title</Type>
-				<Width>326</Width>
+				<Width>261</Width>
 			</Column>
 			<Column>
 				<Type>UserName</Type>
-				<Width>235</Width>
+				<Width>188</Width>
 			</Column>
 			<Column>
 				<Type>Password</Type>
-				<Width>112</Width>
+				<Width>90</Width>
 				<HideWithAsterisks>true</HideWithAsterisks>
 			</Column>
 			<Column>
 				<Type>Url</Type>
-				<Width>536</Width>
+				<Width>429</Width>
 			</Column>
 			<Column>
 				<Type>Notes</Type>
-				<Width>112</Width>
+				<Width>90</Width>
 			</Column>
 		</EntryListColumnCollection>
 		<EntryListColumnDisplayOrder>0 1 2 3 4</EntryListColumnDisplayOrder>
@@ -284,11 +284,11 @@
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_token_sn_id</Key>
-			<Value>3e494599</Value>
+			<Value>3e8f4bca</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database.kdbx.keepkcs11_object_label</Key>
-			<Value>key</Value>
+			<Value>strong</Value>
 		</Item>
 		<Item>
 			<Key>KeePKCS11.DESKTOP-FOSRDRT.DESKTOP-FOSRDRT.Admin.Database33333.kdbx.keepkcs11_lib_path</Key>

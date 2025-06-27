@@ -9,13 +9,9 @@ using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace KeePKCS11.Forms
 {
@@ -56,16 +52,10 @@ namespace KeePKCS11.Forms
             
         }
 
-        private void M_dynGenProfiles_MenuClick(object sender, DynamicMenuEventArgs e)
+        private void OnFormClose(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show(Convert.ToString(e.ItemName));
-            throw new NotImplementedException();
+            GlobalWindowManager.RemoveWindow(this);
         }
-
-        //private void OnFormClose(object sender, FormClosingEventArgs e)
-        //{
-        //    GlobalWindowManager.RemoveWindow(this);
-        //}
 
 
         /// <summary>
@@ -150,6 +140,9 @@ namespace KeePKCS11.Forms
                 {
                     listViewDataObjects.Items.Add(new ListViewItem(dataObject));
                 }
+
+                btnCreateKey.Enabled = true;
+                btnSelectKey.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -199,19 +192,48 @@ namespace KeePKCS11.Forms
 
         private void btnCreateKey_Click(object sender, EventArgs e)
         {
-            // читаем все профили для генерации пароля
-            /*m_dynGenProfiles.Clear();
-*/
-            foreach (PwProfile pwgo in PwGeneratorUtil.GetAllProfiles(true))
+            try
             {
-                MessageBox.Show(pwgo.Name);
-                //m_dynGenProfiles.AddItem(pwgo.Name, null);
-            }
-            //m_dynGenProfiles = new DynamicMenu(generateUsingProfileToolStripMenuItem.DropDownItems);
-            //m_dynGenProfiles.MenuClick += M_dynGenProfiles_MenuClick;
+                PwGeneratorForm pgf = new PwGeneratorForm();
 
-            //contextMenuStripPassGen.Show(btnCreateKey, new Point(0, btnCreateKey.Height));
-            //contextMenuStripPassGen.Show();
+                if (pgf.ShowDialog() == DialogResult.OK)
+                {
+                    byte[] pbEntropy = EntropyForm.CollectEntropyIfEnabled(pgf.SelectedProfile);
+                    ProtectedString psNewPassword;
+                    PwGenerator.Generate(out psNewPassword, pgf.SelectedProfile, pbEntropy,
+                        Program.PwGeneratorPool);
+                    byte[] pbNewPassword = psNewPassword.ReadUtf8();
+
+
+                    string tokenPin = null;
+                    string objectLabel = null;
+                    FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
+                    if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+                    {
+                        tokenPin = formEnterLabelAndPIN.enteredPIN;
+                        objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+                    }
+                    else
+                    {
+                        MessageBox.Show("PIN code entry cancelled");
+                        return;
+                    }
+                    CreateObject(objectLabel, tokenPin, pbNewPassword);
+                    listViewDataObjects.Items.Clear();
+                    List<string> dataObjects = FindAllObjects(tokenPin);
+                    foreach (var dataObject in dataObjects)
+                    {
+                        listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                    }
+                    UIUtil.DestroyForm(pgf);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
 
         }
 
@@ -339,38 +361,6 @@ namespace KeePKCS11.Forms
         }
 
         /// <summary>
-        /// Генератор случайного пароля
-        /// </summary>
-        /// <returns>256 битовое случайное значение пароля(Энтропия: ≈135.71 бит)</returns>
-        string GenerateRandomPassword()
-        {
-            // Использовать Random() не безопасно, в следующей версии буду использовать встроенный генератор паролей KeePass
-            Random rand = new Random();
-            int symbolType;
-            char[] charArray = new char[32];
-            for (int i = 0; i < charArray.Length; i++)
-            {
-                symbolType = rand.Next(1, 4);
-                if (symbolType == 1)
-                {
-                    //цифры от 0 до 9 по ASKII таблице
-                    charArray[i] = (char)rand.Next(48, 58);
-                }
-                if (symbolType == 2)
-                {
-                    //Латинские прописные символы A-Z по ASKII таблице
-                    charArray[i] = (char)rand.Next(65, 91);
-                }
-                if (symbolType == 3)
-                {
-                    //Латинские строчные символы a-z по ASKII таблице
-                    charArray[i] = (char)rand.Next(97, 123);
-                }
-            }
-            return new string(charArray).Trim();
-        }
-
-        /// <summary>
         /// Диалог выбора библиотеки pkcs11
         /// </summary>
         /// <param name="sender"></param>
@@ -403,61 +393,15 @@ namespace KeePKCS11.Forms
             if (String.IsNullOrEmpty(tbxLibraryPath.Text))
             {
                 btnGetLibraryInfo.Enabled = false;
+                btnCreateKey.Enabled = false;
+                btnReadTokenData.Enabled = false;
+                btnSelectKey.Enabled = false;
             }
             else
             {
                 btnGetLibraryInfo.Enabled = true;
+                btnReadTokenData.Enabled = true;
             }
         }
-
-        private void openPassGenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    PwGeneratorForm pgf = new PwGeneratorForm();
-
-            //    if (pgf.ShowDialog() == DialogResult.OK)
-            //    {
-            //        byte[] pbEntropy = EntropyForm.CollectEntropyIfEnabled(pgf.SelectedProfile);
-            //        ProtectedString psNewPassword;
-            //        PwGenerator.Generate(out psNewPassword, pgf.SelectedProfile, pbEntropy,
-            //            Program.PwGeneratorPool);
-
-            //        byte[] pbNewPassword = psNewPassword.ReadUtf8();
-
-
-
-            //        string tokenPin = null;
-            //        string objectLabel = null;
-
-            //        FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
-            //        if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
-            //        {
-            //            tokenPin = formEnterLabelAndPIN.enteredPIN;
-            //            objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("PIN code entry cancelled");
-            //            return;
-            //        }
-            //        CreateObject(objectLabel, tokenPin, pbNewPassword);
-            //        listViewDataObjects.Items.Clear();
-            //        List<string> dataObjects = FindAllObjects(tokenPin);
-            //        foreach (var dataObject in dataObjects)
-            //        {
-            //            listViewDataObjects.Items.Add(new ListViewItem(dataObject));
-            //        }
-            //        UIUtil.DestroyForm(pgf);
-            //    }
-            //}
-
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    throw;
-            //}
-        }
-
     }
 }
