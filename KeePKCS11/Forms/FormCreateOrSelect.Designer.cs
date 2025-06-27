@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateOrSelect));
             this.btnGetLibraryInfo = new System.Windows.Forms.Button();
             this.tbxLibraryPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblLibraryManufacturer = new System.Windows.Forms.Label();
             this.lblLibraryVersion = new System.Windows.Forms.Label();
             this.lblCryptokiVersion = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.listViewTokens = new System.Windows.Forms.ListView();
@@ -48,6 +48,7 @@
             this.btnCreateKey = new System.Windows.Forms.Button();
             this.btnSelectKey = new System.Windows.Forms.Button();
             this.btnSelectLibrary = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,16 +106,6 @@
             this.lblCryptokiVersion.Size = new System.Drawing.Size(94, 13);
             this.lblCryptokiVersion.TabIndex = 5;
             this.lblCryptokiVersion.Text = "PKCS#11 version:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::KeePKCS11.Properties.Resources.pkcs11_token;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(106, 118);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
             // 
             // label2
             // 
@@ -207,6 +198,7 @@
             // 
             // btnCreateKey
             // 
+            this.btnCreateKey.Enabled = false;
             this.btnCreateKey.Location = new System.Drawing.Point(12, 491);
             this.btnCreateKey.Name = "btnCreateKey";
             this.btnCreateKey.Size = new System.Drawing.Size(75, 23);
@@ -218,6 +210,7 @@
             // btnSelectKey
             // 
             this.btnSelectKey.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSelectKey.Enabled = false;
             this.btnSelectKey.Location = new System.Drawing.Point(415, 491);
             this.btnSelectKey.Name = "btnSelectKey";
             this.btnSelectKey.Size = new System.Drawing.Size(115, 23);
@@ -235,6 +228,16 @@
             this.btnSelectLibrary.Text = "...";
             this.btnSelectLibrary.UseVisualStyleBackColor = true;
             this.btnSelectLibrary.Click += new System.EventHandler(this.btnSelectLibrary_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KeePKCS11.Properties.Resources.pkcs11_token;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(106, 118);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // FormCreateOrSelect
             // 
@@ -257,10 +260,11 @@
             this.Controls.Add(this.tbxLibraryPath);
             this.Controls.Add(this.btnGetLibraryInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormCreateOrSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "pkcs#11 test editor";
+            this.Text = "KeePKCS11";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

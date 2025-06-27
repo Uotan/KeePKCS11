@@ -1,10 +1,14 @@
-﻿using KeePass.Plugins;
+﻿using KeePass.Forms;
+using KeePass;
+using KeePass.Plugins;
 using KeePass.UI;
+using KeePass.Util;
+using KeePassLib.Cryptography.PasswordGenerator;
+using KeePassLib.Security;
 using Net.Pkcs11Interop.Common;
 using Net.Pkcs11Interop.HighLevelAPI;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -16,12 +20,13 @@ namespace KeePKCS11.Forms
         List<ISlot> slots = null;
         ISlot selectedSlot = null;
         Pkcs11InteropFactories factories;
+        private DynamicMenu m_dynGenProfiles = null;
 
         public byte[] keyByteArray { get; private set; }
 
         private IPluginHost m_host = null;
         private string database;
-        private DynamicMenu m_dynGenProfiles;
+        
         public FormCreateOrSelect()
         {
             InitializeComponent();
@@ -40,15 +45,17 @@ namespace KeePKCS11.Forms
             InitializeComponent();
         }
 
-        //private void OnFormLoad(object sender, EventArgs e)
-        //{
-        //    GlobalWindowManager.AddWindow(this);
-        //}
+        private void OnFormLoad(object sender, EventArgs e)
+        {
+            GlobalWindowManager.AddWindow(this);
 
-        //private void OnFormClose(object sender, FormClosingEventArgs e)
-        //{
-        //    GlobalWindowManager.RemoveWindow(this);
-        //}
+            
+        }
+
+        private void OnFormClose(object sender, FormClosingEventArgs e)
+        {
+            GlobalWindowManager.RemoveWindow(this);
+        }
 
 
         /// <summary>
@@ -133,6 +140,9 @@ namespace KeePKCS11.Forms
                 {
                     listViewDataObjects.Items.Add(new ListViewItem(dataObject));
                 }
+
+                btnCreateKey.Enabled = true;
+                btnSelectKey.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -184,34 +194,47 @@ namespace KeePKCS11.Forms
         {
             try
             {
-                string tokenPin = null;
-                string objectLabel = null;
+                PwGeneratorForm pgf = new PwGeneratorForm();
 
-                FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
-                if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+                if (pgf.ShowDialog() == DialogResult.OK)
                 {
-                    tokenPin = formEnterLabelAndPIN.enteredPIN;
-                    objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
-                }
-                else
-                {
-                    MessageBox.Show("PIN code entry cancelled");
-                    return;
-                }
-                CreateObject(objectLabel, tokenPin);
-                listViewDataObjects.Items.Clear();
-                List<string> dataObjects = FindAllObjects(tokenPin);
-                foreach (var dataObject in dataObjects)
-                {
-                    listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                    byte[] pbEntropy = EntropyForm.CollectEntropyIfEnabled(pgf.SelectedProfile);
+                    ProtectedString psNewPassword;
+                    PwGenerator.Generate(out psNewPassword, pgf.SelectedProfile, pbEntropy,
+                        Program.PwGeneratorPool);
+                    byte[] pbNewPassword = psNewPassword.ReadUtf8();
+
+
+                    string tokenPin = null;
+                    string objectLabel = null;
+                    FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
+                    if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+                    {
+                        tokenPin = formEnterLabelAndPIN.enteredPIN;
+                        objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+                    }
+                    else
+                    {
+                        MessageBox.Show("PIN code entry cancelled");
+                        return;
+                    }
+                    CreateObject(objectLabel, tokenPin, pbNewPassword);
+                    listViewDataObjects.Items.Clear();
+                    List<string> dataObjects = FindAllObjects(tokenPin);
+                    foreach (var dataObject in dataObjects)
+                    {
+                        listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                    }
+                    UIUtil.DestroyForm(pgf);
                 }
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -296,15 +319,19 @@ namespace KeePKCS11.Forms
         /// Создает объект CKO_DATA в выбранном слоте (токене)
         /// </summary>
         /// <param name="_objectNameToCreate">Имя создаваемого объекта</param>
-        /// <param name="_userPIN">PIN-код от пользователя</param>
-        void CreateObject(string _objectNameToCreate, string _userPIN)
+        /// <param name="_userPIN">PIN-код от пользователя</param>>
+        /// <param name="_passString">Массив байтов для создаваемого на токене ключа</param>>
+        void CreateObject(string _objectNameToCreate, string _userPIN, byte[] _passString)
         {
             try
             {
                 // Open RW session
                 using (ISession session = selectedSlot.OpenSession(SessionType.ReadWrite))
                 {
-                    string keyValue = GenerateRandomPassword();
+                    //string keyValue = GenerateRandomPassword();
+                    //string keyValue = BitConverter.ToString(_passString);
+
+
                     // Login as normal user
                     session.Login(CKU.CKU_USER, _userPIN);
 
@@ -315,7 +342,7 @@ namespace KeePKCS11.Forms
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_PRIVATE, true));
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_MODIFIABLE, false));
                     objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_LABEL, _objectNameToCreate));
-                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, keyValue));
+                    objectAttributes.Add(session.Factories.ObjectAttributeFactory.Create(CKA.CKA_VALUE, _passString));
 
                     // Create object
                     IObjectHandle objectHandle = session.CreateObject(objectAttributes);
@@ -331,38 +358,6 @@ namespace KeePKCS11.Forms
                 throw;
             }
             
-        }
-
-        /// <summary>
-        /// Генератор случайного пароля
-        /// </summary>
-        /// <returns>256 битовое случайное значение пароля(Энтропия: ≈135.71 бит)</returns>
-        string GenerateRandomPassword()
-        {
-            // Использовать Random() не безопасно, в следующей версии буду использовать встроенный генератор паролей KeePass
-            Random rand = new Random();
-            int symbolType;
-            char[] charArray = new char[32];
-            for (int i = 0; i < charArray.Length; i++)
-            {
-                symbolType = rand.Next(1, 4);
-                if (symbolType == 1)
-                {
-                    //цифры от 0 до 9 по ASKII таблице
-                    charArray[i] = (char)rand.Next(48, 58);
-                }
-                if (symbolType == 2)
-                {
-                    //Латинские прописные символы A-Z по ASKII таблице
-                    charArray[i] = (char)rand.Next(65, 91);
-                }
-                if (symbolType == 3)
-                {
-                    //Латинские строчные символы a-z по ASKII таблице
-                    charArray[i] = (char)rand.Next(97, 123);
-                }
-            }
-            return new string(charArray).Trim();
         }
 
         /// <summary>
@@ -398,10 +393,14 @@ namespace KeePKCS11.Forms
             if (String.IsNullOrEmpty(tbxLibraryPath.Text))
             {
                 btnGetLibraryInfo.Enabled = false;
+                btnCreateKey.Enabled = false;
+                btnReadTokenData.Enabled = false;
+                btnSelectKey.Enabled = false;
             }
             else
             {
                 btnGetLibraryInfo.Enabled = true;
+                btnReadTokenData.Enabled = true;
             }
         }
     }
