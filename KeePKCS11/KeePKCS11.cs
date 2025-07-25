@@ -1,17 +1,17 @@
 ﻿/*
-    KeePKCS11 - A plugin for KeePass using the PKCS#11 standard for storing keys on cryptographic tokens
-    Copyright (C) 2025 Uotan
+   KeePKCS11 - A plugin for KeePass using the PKCS#11 standard for storing keys on cryptographic tokens
+   Copyright (C) 2025 Uotan
 
-    GNU GENERAL PUBLIC LICENSE
-    Version 2, June 1991
+   GNU GENERAL PUBLIC LICENSE
+   Version 2, June 1991
 
-    Copyright (C) 1989, 1991 Free Software Foundation, Inc.
-    <https://fsf.org/>
+   Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+   <https://fsf.org/>
 
-    Everyone is permitted to copy and distribute verbatim copies
-    of this license document, but changing it is not allowed.
+   Everyone is permitted to copy and distribute verbatim copies
+   of this license document, but changing it is not allowed.
 
-    For the full license text, see: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+   For the full license text, see: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 */
 
 using KeePass.Plugins;
