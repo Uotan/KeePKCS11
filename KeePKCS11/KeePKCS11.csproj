@@ -42,6 +42,10 @@
     <Reference Include="KeePass">
       <HintPath>..\KeePass-2.58\KeePass.exe</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Pkcs11Interop, Version=5.3.0.0, Culture=neutral, PublicKeyToken=c10e9c2d8c006d2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\Pkcs11Interop.dll</HintPath>
@@ -56,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CKO_DATA.cs" />
     <Compile Include="Forms\FormConfirmKey.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pkcs11_token.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Library\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

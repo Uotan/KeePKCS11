@@ -48,6 +48,9 @@ C:\keepass\KeePass.exe --plgx-create C:\repos\KeePKCS11\KeePKCS11
 [MOST LIKELY] - производителем заявлена поддержка стандарта PKCS#11, но тестирование на совместимость не производил.
 
 #### [Aladdin R.D. JaCarta Единый Клиент](https://www.aladdin-rd.ru/support/downloads/jacarta_client)
+```
+C:\Windows\System32\jcPKCS11-2.dll
+```
 * JaCarta PKI [PASS]
 * JaCarta-2 ГОСТ [PASS]
 * JaCarta-2 PKI/ГОСТ (видит оба апплета одновременно) [PASS]
@@ -58,9 +61,13 @@ C:\keepass\KeePass.exe --plgx-create C:\repos\KeePKCS11\KeePKCS11
 * eToken PRO (Java) [MOST LIKELY]
 
 #### [Aktiv Rutoken](https://www.rutoken.ru/support/download/windows/)
+```
+C:\Windows\System32\rtPKCS11ECP.dll
+C:\Windows\System32\rtPKCS11.dll
+```
 * Рутокен Lite [PASS]
 * Рутокен ЭЦП 2.0 / 3.0 [PASS]
-* Рутокен S [MOST LIKELY]
+* Рутокен S [PASS]
 
 #### [ESMART PKI Client](https://token.esmart.ru/downloads)
 * ESMART Token [MOST LIKELY]

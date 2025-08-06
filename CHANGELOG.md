@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2025-08-06
+### Added
+- Экспорт объекта CKO_DATA в файл формата *.keepkcs11 (БЕЗ ШИФРОВАНИЯ)
+- Импорт объекта CKO_DATA из файла формата *.keepkcs11
+
+### Fixed
+- Исправлен баг с чтением ключа из устройств с двумя апплетами (JaCarta 2 PKI/ГОСТ)
+
 ## [1.1.0] - 2025-07-25
 
 ### Fixed

@@ -11,8 +11,13 @@ This software includes the following third-party library:
 - **Pkcs11Interop** (Apache 2.0 License)
   - Source: [https://github.com/Pkcs11Interop/Pkcs11Interop](https://github.com/Pkcs11Interop/Pkcs11Interop)
 
+- **Newtonsoft.Json** (MIT License)
+	- Source: [https://github.com/JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+
+
+
 
 
 ### Compatibility Note
-- **GPL v2** is compatible with **Apache 2.0** for derivative works, but the entire project must remain under GPL.
-- Pkcs11Interop is dynamically linked, so no additional restrictions apply.
+This project is licensed under **GPL-2.0**.
+Third-party libraries are used under their own licenses (MIT/Apache 2.0), which are compatible with GPL-2.0.

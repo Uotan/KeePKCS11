@@ -48,6 +48,20 @@ namespace KeePKCS11
                     return Assembly.Load(buffer);
                 }
             }
+
+            if (args.Name.StartsWith("Newtonsoft", StringComparison.OrdinalIgnoreCase) ||
+                args.Name.StartsWith("Newtonsoft.Json", StringComparison.OrdinalIgnoreCase))
+            {
+                string resourceName = "KeePKCS11.Library.Newtonsoft.Json.dll";
+
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+                {
+                    if (stream == null) return null;
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Read(buffer, 0, buffer.Length);
+                    return Assembly.Load(buffer);
+                }
+            }
             return null;
         }
 
@@ -85,9 +99,12 @@ namespace KeePKCS11
     public sealed class KeePKCS11 : KeyProvider
     {
         public static IPluginHost m_host = null;
+
+        //config strings
         public static string keepkcs11_conf_lib_path = null;
         public static string keepkcs11_conf_token_sn_id = null;
         public static string keepkcs11_conf_object_label = null;
+        public static string keepkcs11_conf_token_model = null;
         public static string database_name = null;
 
         public override bool DirectKey { get { return true; } }
@@ -167,6 +184,7 @@ namespace KeePKCS11
             keepkcs11_conf_lib_path = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11.database_name + ".keepkcs11_lib_path");
             keepkcs11_conf_token_sn_id = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11.database_name + ".keepkcs11_token_sn_id");
             keepkcs11_conf_object_label = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11.database_name + ".keepkcs11_object_label");
+            keepkcs11_conf_token_model = m_host.CustomConfig.GetString(configBase + strRef + KeePKCS11.database_name + ".keepkcs11_token_model");
         }
 
         /// <summary>
@@ -175,7 +193,11 @@ namespace KeePKCS11
         /// <param name="pkcs11LibraryPath">путь к модулю pkcs11</param>
         /// <param name="tokenSN">Серийный номер токена</param>
         /// <param name="objectLabel">Имя объекта данных</param>
-        public static void SaveSettings(string pkcs11LibraryPath, string tokenSN, string objectLabel)
+        /// <param name="tokenModel">Модель токена (имя приложения/апплета)</param>
+        public static void SaveSettings(string pkcs11LibraryPath,
+            string tokenSN,
+            string objectLabel,
+            string tokenModel)
         {
             string configBase = "KeePKCS11.";
             string strRef =
@@ -185,10 +207,12 @@ namespace KeePKCS11
             string _keepkcs11_conf_lib_path = configBase + strRef + KeePKCS11.database_name + ".keepkcs11_lib_path";
             string _keepkcs11_conf_token_sn_id = configBase + strRef + KeePKCS11.database_name + ".keepkcs11_token_sn_id";
             string _keepkcs11_conf_object_label = configBase + strRef + KeePKCS11.database_name + ".keepkcs11_object_label";
+            string _keepkcs11_conf_token_model = configBase + strRef + KeePKCS11.database_name + ".keepkcs11_token_model";
 
             m_host.CustomConfig.SetString(_keepkcs11_conf_lib_path, pkcs11LibraryPath);
             m_host.CustomConfig.SetString(_keepkcs11_conf_token_sn_id, tokenSN);
             m_host.CustomConfig.SetString(_keepkcs11_conf_object_label, objectLabel);
+            m_host.CustomConfig.SetString(_keepkcs11_conf_token_model, tokenModel);
         }
 
 
@@ -243,7 +267,8 @@ namespace KeePKCS11
             {
                 try
                 {
-                    FormConfirmKey dialogConfirm = new FormConfirmKey(keepkcs11_conf_lib_path, keepkcs11_conf_token_sn_id, keepkcs11_conf_object_label);
+                    FormConfirmKey dialogConfirm = new FormConfirmKey(keepkcs11_conf_lib_path,keepkcs11_conf_token_sn_id,keepkcs11_conf_object_label,keepkcs11_conf_token_model);
+
                     if (UIUtil.ShowDialogAndDestroy(dialogConfirm) == DialogResult.OK)
                     {
                         return dialogConfirm.keyByteArray;

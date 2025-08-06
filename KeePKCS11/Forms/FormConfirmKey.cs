@@ -16,14 +16,16 @@ namespace KeePKCS11.Forms
         string libPath = null;
         string tokenSN = null;
         string objectLabel = null;
+        string tokenModel = null;
 
         public byte[] keyByteArray { get; private set; }
 
-        public FormConfirmKey(string libPath, string tokenSN, string objectLabel)
+        public FormConfirmKey(string _libPath, string _tokenSN, string _objectLabel, string _tokenModel)
         {
-            this.libPath = libPath;
-            this.tokenSN = tokenSN;
-            this.objectLabel = objectLabel;
+            libPath = _libPath;
+            tokenSN = _tokenSN;
+            objectLabel = _objectLabel;
+            tokenModel = _tokenModel;
             InitializeComponent();
             
         }
@@ -43,7 +45,7 @@ namespace KeePKCS11.Forms
         {
             try
             {
-                keyByteArray = GetExistingKey(tbxPinCode.Text, libPath, tokenSN, objectLabel);
+                keyByteArray = GetExistingKey(tbxPinCode.Text, libPath, tokenSN, objectLabel, tokenModel);
             }
             catch (Exception ex)
             {
@@ -95,7 +97,7 @@ namespace KeePKCS11.Forms
         /// <param name="tokenSN">Серийный номер токена</param>
         /// <param name="objectLablel">Имя объекта CKO_DATA</param>
         /// <returns></returns>
-        public byte[] GetExistingKey(string userPIN, string libPath, string tokenSN, string objectLablel)
+        public byte[] GetExistingKey(string userPIN, string libPath, string tokenSN, string objectLablel, string tokenModel)
         {
             try
             {
@@ -106,7 +108,7 @@ namespace KeePKCS11.Forms
                 foreach (ISlot slot in slots)
                 {
                     var token = slot.GetTokenInfo();
-                    if (token.SerialNumber.Contains(tokenSN))
+                    if (token.SerialNumber.Contains(tokenSN)&&token.Model.Contains(tokenModel))
                     {
                         selectedSlot = slot;
                         break;
@@ -166,6 +168,7 @@ namespace KeePKCS11.Forms
         private void FormConfirmKey_Load(object sender, EventArgs e)
         {
             lblTokeSerialNumber.Text = "Token S/N: " + tokenSN;
+            lblTokeModel.Text = "Token Model: " + tokenModel;
         }
     }
 }

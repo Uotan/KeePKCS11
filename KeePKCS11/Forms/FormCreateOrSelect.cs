@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using KeePKCS11.Classes;
+using System.IO;
 
 namespace KeePKCS11.Forms
 {
@@ -143,6 +146,8 @@ namespace KeePKCS11.Forms
 
                 btnCreateKey.Enabled = true;
                 btnSelectKey.Enabled = true;
+                btnImportKey.Enabled = true;
+                btnExportKey.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -257,9 +262,16 @@ namespace KeePKCS11.Forms
                     MessageBox.Show("PIN code entry cancelled");
                     return;
                 }
-                string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
-                KeePKCS11.SaveSettings(this.tbxLibraryPath.Text, this.listViewTokens.SelectedItems[0].SubItems[1].Text, listViewDataObjects.SelectedItems[0].SubItems[0].Text);
-                keyByteArray = Encoding.ASCII.GetBytes(keyValue);
+                //string keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
+                byte [] keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
+
+                KeePKCS11.SaveSettings(this.tbxLibraryPath.Text,
+                    listViewTokens.SelectedItems[0].SubItems[1].Text,
+                    listViewDataObjects.SelectedItems[0].SubItems[0].Text,
+                    listViewTokens.SelectedItems[0].SubItems[2].Text);
+
+                //keyByteArray = Encoding.ASCII.GetBytes(keyValue);
+                keyByteArray = keyValue;
                 // return DialogResult.OK
                 Close();
             }
@@ -271,17 +283,18 @@ namespace KeePKCS11.Forms
             
         }
 
+
         /// <summary>
         /// Ищет объекты CKO_DATA в выбраном токене по имени
         /// </summary>
         /// <param name="_findingObjectName">Название искомого объекта данных</param>
         /// <param name="_userPIN">PIN-код от пользователя</param>
         /// <returns></returns>
-        string FindKeyObject(string _findingObjectName, string _userPIN)
+        byte [] FindKeyObject(string _findingObjectName, string _userPIN)
         {
             try
             {
-                string _keyValue = null;
+                byte[] _keyValue = null;
                 using (ISession session = selectedSlot.OpenSession(SessionType.ReadOnly))
                 {
                     // Login as normal user
@@ -300,7 +313,8 @@ namespace KeePKCS11.Forms
                         List<IObjectAttribute> requiredAttributes = session.GetAttributeValue(foundObject, attributes);
                         if (requiredAttributes[0].GetValueAsString() == _findingObjectName.Trim())
                         {
-                            _keyValue = Encoding.UTF8.GetString(requiredAttributes[1].GetValueAsByteArray());
+                            //_keyValue = Encoding.UTF8.GetString(requiredAttributes[1].GetValueAsByteArray());
+                            _keyValue = requiredAttributes[1].GetValueAsByteArray();
                         }
                     }
                     session.Logout();
@@ -314,6 +328,7 @@ namespace KeePKCS11.Forms
             }
             
         }
+
 
         /// <summary>
         /// Создает объект CKO_DATA в выбранном слоте (токене)
@@ -360,6 +375,7 @@ namespace KeePKCS11.Forms
             
         }
 
+
         /// <summary>
         /// Диалог выбора библиотеки pkcs11
         /// </summary>
@@ -383,6 +399,7 @@ namespace KeePKCS11.Forms
             }
         }
 
+
         /// <summary>
         /// Просто защита от дурака
         /// </summary>
@@ -396,11 +413,114 @@ namespace KeePKCS11.Forms
                 btnCreateKey.Enabled = false;
                 btnReadTokenData.Enabled = false;
                 btnSelectKey.Enabled = false;
+                btnExportKey.Enabled = false;
+                btnImportKey.Enabled = false;
             }
             else
             {
                 btnGetLibraryInfo.Enabled = true;
                 btnReadTokenData.Enabled = true;
+            }
+        }
+
+        private void btnImportKey_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (OpenFileDialog openDialog = new OpenFileDialog())
+                {
+                    openDialog.Filter = "JSON Files (*.keepkcs11)|*.keepkcs11|All files (*.*)|*.*";
+                    openDialog.Title = "Import CKO_DATA from JSON";
+
+                    CKO_DATA keyObject;
+
+                    if (openDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string json = File.ReadAllText(openDialog.FileName);
+                        keyObject = JsonConvert.DeserializeObject<CKO_DATA>(json);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The file selection was canceled by the user");
+                        return;
+                    }
+
+                    string tokenPin = null;
+                    string objectLabel = null;
+                    FormEnterLabelAndPIN formEnterLabelAndPIN = new FormEnterLabelAndPIN();
+                    if (UIUtil.ShowDialogAndDestroy(formEnterLabelAndPIN) == DialogResult.OK)
+                    {
+                        tokenPin = formEnterLabelAndPIN.enteredPIN;
+                        objectLabel = formEnterLabelAndPIN.enteredObjectLabel;
+                    }
+                    else
+                    {
+                        MessageBox.Show("PIN code entry cancelled");
+                        return;
+                    }
+
+                    CreateObject(objectLabel, tokenPin, keyObject.CKA_VALUE);
+                    listViewDataObjects.Items.Clear();
+                    List<string> dataObjects = FindAllObjects(tokenPin);
+                    foreach (var dataObject in dataObjects)
+                    {
+                        listViewDataObjects.Items.Add(new ListViewItem(dataObject));
+                    }
+                    MessageBox.Show("Import completed successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
+        }
+
+        private void btnExportKey_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tokenPin = null;
+                FormEnterPIN formEnterPIN = new FormEnterPIN();
+                if (formEnterPIN.ShowDialog() == DialogResult.OK)
+                {
+                    tokenPin = formEnterPIN.enteredPIN;
+                }
+                else
+                {
+                    MessageBox.Show("PIN code entry cancelled");
+                    return;
+                }
+                byte[] keyValue = FindKeyObject(listViewDataObjects.SelectedItems[0].SubItems[0].Text, tokenPin);
+                keyByteArray = keyValue;
+
+                // Сохраняет объект CKO_DATA в JSON-файл (с диалоговым окном выбора пути)
+                CKO_DATA keyObject = new CKO_DATA(listViewDataObjects.SelectedItems[0].SubItems[0].Text, keyValue);
+                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "KeePKCS11 Files (*.keepkcs11)|*.keepkcs11|All files (*.*)|*.*";
+                    saveDialog.Title = "Export CKO_DATA as JSON";
+                    saveDialog.DefaultExt = "keepkcs11";
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string keyObjectJSON = JsonConvert.SerializeObject(keyObject, Formatting.Indented);
+                        File.WriteAllText(saveDialog.FileName, keyObjectJSON);
+                        MessageBox.Show("The file has been saved successfully!\nAttention!!! The created file is not encrypted.", "Success",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Saving the file was canceled by the user");
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
             }
         }
     }

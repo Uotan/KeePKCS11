@@ -23,6 +23,7 @@ namespace KeePKCS11.Forms
         private void OnFormLoad(object sender, EventArgs e)
         {
             GlobalWindowManager.AddWindow(this);
+            tbxPinCode.Focus();
         }
 
         private void OnFormClose(object sender, FormClosingEventArgs e)

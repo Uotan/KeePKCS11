@@ -9,4 +9,4 @@ cd KeePass-2.58
 KeePass.exe --plgx-create %CURRENT_DIR%KeePKCS11
 
 echo KeePKCS11.plgx was created in %CURRENT_DIR%
-pause
+exit
